@@ -1,0 +1,100 @@
+<resources>
+    <string name="app_name">Money Tracker</string>
+    <string name="splash_text">Track &amp; Save</string>
+    <string name="splash_text2">Your Money</string>
+
+    <!--   For Log In & Sign Up Page-->
+    <string name="welcome_text">Welcome Back !</string>
+    <string name="welcome_sub">Let’s Track Wisely</string>
+    <string name="label_emil">Email*</string>
+    <string name="label_password">Password*</string>
+    <string name="placeholder1">Enter your email</string>
+    <string name="placeholder2">Enter your password</string>
+    <string name="remember">Remember me</string>
+    <string name="log_btn">Log In</string>
+    <string name="or_log_with">Or, Login With</string>
+    <string name="signUp">Sign up with Google</string>
+    <string name="have_account">Don’t have an account !</string>
+    <string name="sign_title">Sign Up Account </string>
+    <string name="sign_sub">Join Us &amp; Take Control of Your Finances </string>
+    <string name="full_name">Full Name*</string>
+    <string name="privacy_policy_text">I Have Read &amp; Agree Privacy &amp; Policy </string>
+    <string name="signup_btn">Sign Up</string>
+
+    <!--    Home Page-->
+    <string name="profile_name">Devid Watt</string>
+    <string name="date">2025 <br>May</br> </string>
+    <string name="income">Income</string>
+    <string name="income_money">6000</string>
+    <string name="expense">Expense</string>
+    <string name="expense_money">2300</string>
+    <string name="Balance">10000</string>
+
+
+    <!--    Add Money page-->
+    <string name="add_money">Add Money </string>
+    <string name="food">Food</string>
+    <string name="shopping">Shopping</string>
+    <string name="travel">Travel</string>
+    <string name="rent">Rent</string>
+    <string name="electronics">Electronics</string>
+    <string name="clothing">Clothing</string>
+    <string name="health">Health</string>
+    <string name="pet">Pet</string>
+    <string name="gifts">Gifts</string>
+    <string name="phone">Phone</string>
+    <string name="beauty">Beauty</string>
+    <string name="social">Social</string>
+    <string name="sports">Sports</string>
+    <string name="bike">Bike</string>
+    <string name="housing">Housing</string>
+    <string name="market">Market</string>
+    <string name="others">Others</string>
+    <string name="add">Add</string>
+    <string name="salary">Salary</string>
+    <string name="investment">Investment</string>
+    <string name="part_time">Part Time</string>
+    <string name="bonus">Bonus</string>
+
+    <!--    Analytics-->
+    <string name="month">Month</string>
+    <string name="day">Day\nMon</string>
+    <string name="year">Year</string>
+    <string name="total_cost">Total Cost</string>
+    <string name="daily_report">Daily Report</string>
+    <string name="monthly_report">Monthly Report</string>
+    <string name="yearly_report">Yearly Report</string>
+
+    <!--    Profiles-->
+    <string name="profile">Profile</string>
+    <string name="category">Category Settings</string>
+    <string name="currency">Currency Change</string>
+    <string name="notification">Notification</string>
+    <string name="reminders">Reminders</string>
+    <string name="budget">Budget</string>
+    <string name="export_data">Export Data</string>
+    <string name="Password">Change Password</string>
+    <string name="register_now">Register Now</string>
+    <string name="all_ready_have_an_ccount">All ready have an ccount</string>
+    <string name="full_name_pl">full name</string>
+    <string name="email">email</string>
+    <string name="password">password</string>
+    <string name="userName">David Watt</string>
+    <string name="userEmail">david@gmail.com</string>
+    <string name="currentdate">30/7/2025</string>
+    <string name="balance_text">Balance</string>
+    <string name="menu_home">Home</string>
+    <string name="menu_charts">Charts\n</string>
+    <string name="menu_report">Report\n</string>
+    <string name="menu_profile">Profile</string>
+    <string name="list_date">30 July, 2025</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="enter_amount">Enter amount</string>
+    <string name="calendar">📅</string>
+    <string name="crossBtn">⌫</string>
+    <string name="calendarBtn">📅 Today</string>
+    <string name="saveBtn">✓</string>
+
+
+</resources>

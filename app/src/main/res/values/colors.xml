@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="blue">#3a86ff</color>
+    <color name="vivid_cerulean">#06A8DD</color>
+    <color name="alice_blue">#eaf6ff</color>
+    <color name="gray">#7F8C8D</color>
+    <color name="off_white">#F0F7FF</color>
+    <color name="calculator_bg">#2d3e50</color>
+    <color name="red">#FF0000</color>
+</resources>
