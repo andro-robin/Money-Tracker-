@@ -14,8 +14,11 @@ import com.devrobin.moneytracker.R;
 import com.devrobin.moneytracker.databinding.TransactionItemsBinding;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 import utils.Constant;
+import utils.Helper;
 
 public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.TransactionViewHolder> {
 
@@ -43,10 +46,25 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
 
         TransactionModel transModel = transList.get(position);
 
-        holder.itemsBinding.categoryAmount.setText(String.valueOf(transModel.getAmount()));
-        holder.itemsBinding.categoryNote.setText(transModel.getCategory());
-//        holder.itemsBinding.currentDate.setText(Helper.setDateFormate(transModel.getCurrentDate()));
+        String transNote = transModel.getNote();
 
+        if (transNote != null && !transNote.trim().isEmpty()){
+            holder.itemsBinding.categoryNote.setText(transNote);
+        }
+        else {
+            holder.itemsBinding.categoryNote.setText(transModel.getCategory());
+        }
+
+        holder.itemsBinding.categoryAmount.setText(String.valueOf(transModel.getAmount()));
+//        holder.itemsBinding.date.setText(Helper.setDateFormate(transModel.getCurrentDate()));
+
+        //Date Formatting
+        Date transactionDate = transModel.getTransactionDate();
+        if (transactionDate != null){
+
+        }
+
+        //Set Category Icon and Background
         CategoryModel transCategory = Constant.setCategoryDetails(transModel.getCategory());
 
         if (transCategory != null){
@@ -60,6 +78,7 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
 
 
 
+        //Set Income and Expense Type
         if (transModel.getType().equals("Income")){
             holder.itemsBinding.categoryAmount.setTextColor(context.getColor(R.color.blue));
         }
@@ -102,17 +121,6 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
         }
     }
 
-
-//    public class DateHeaderViewHolder extends RecyclerView.ViewHolder{
-//
-//        DateHeaderItemsBinding dateItemBinding;
-//
-//        public DateHeaderViewHolder(@NonNull DateHeaderItemsBinding dateItemBinding) {
-//            super(dateItemBinding.getRoot());
-//
-//            this.dateItemBinding = dateItemBinding;
-//        }
-//    }
 
 
     public interface onTransItemClickListener {

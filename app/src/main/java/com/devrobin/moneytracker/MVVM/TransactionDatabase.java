@@ -8,7 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
-import androidx.room.Transaction;
+import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.devrobin.moneytracker.MVVM.Model.TransactionModel;
@@ -17,8 +17,10 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import utils.Constant;
+import utils.DateConverter;
 
-@Database(entities = {TransactionModel.class}, version = 1)
+@Database(entities = {TransactionModel.class}, version = 1, exportSchema = false)
+@TypeConverters({DateConverter.class})
 public abstract class TransactionDatabase extends RoomDatabase {
 
     public abstract TransactionDao transDao();
@@ -34,38 +36,40 @@ public abstract class TransactionDatabase extends RoomDatabase {
                     TransactionDatabase.class,
                     "transaction_table")
                     .fallbackToDestructiveMigration()
-                    .addCallback(roomCallback)
                     .build();
         }
 
         return instance;
     }
 
-
-    private static final RoomDatabase.Callback roomCallback = new Callback() {
-        @Override
-        public void onCreate(@NonNull SupportSQLiteDatabase db) {
-            super.onCreate(db);
-
-            initialTransaction();
-
-        }
-    };
+//                        .addCallback(roomCallback)
 
 
 
-    private static void initialTransaction() {
+//    private static final RoomDatabase.Callback roomCallback = new Callback() {
+//        @Override
+//        public void onCreate(@NonNull SupportSQLiteDatabase db) {
+//            super.onCreate(db);
+//
+//            initialTransaction();
+//
+//        }
+//    };
 
-        TransactionDao transDao = instance.transDao();
 
 
-        ExecutorService executorService = Executors.newSingleThreadExecutor();
-
-
-        executorService.execute(new Runnable() {
-            @Override
-            public void run() {
-
+//    private static void initialTransaction() {
+//
+//        TransactionDao transDao = instance.transDao();
+//
+//
+//        ExecutorService executorService = Executors.newSingleThreadExecutor();
+//
+//
+//        executorService.execute(new Runnable() {
+//            @Override
+//            public void run() {
+//
 //                TransactionModel trans1 = new TransactionModel();
 //
 //                trans1.setType(Constant.EXPENSE);
@@ -81,10 +85,10 @@ public abstract class TransactionDatabase extends RoomDatabase {
 //
 //                transDao.insertTransaction(trans1);
 //                transDao.insertTransaction(trans2);
-            }
-        });
-
-    }
+//            }
+//        });
+//
+//    }
 
 }
 

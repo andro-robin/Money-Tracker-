@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,6 +36,7 @@ import com.google.firebase.auth.FirebaseUser;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Objects;
 
 import utils.Constant;
@@ -65,8 +67,7 @@ public class AddTransaction extends BottomSheetDialogFragment {
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener authStateListener;
 
-    Calendar calendar;
-
+    private String selectedDate;
 
 
     public AddTransaction() {
@@ -228,20 +229,46 @@ public class AddTransaction extends BottomSheetDialogFragment {
             @Override
             public void onClick(View view) {
 
-                double amount = Double.parseDouble(addBinding.amount.getText().toString());
-                String note = addBinding.note.getText().toString();
+                String amountStr = addBinding.amount.getText().toString().trim();
+                String date = addBinding.date.toString();
+                String note = addBinding.note.getText().toString().trim();
                 String category = addBinding.category.getText().toString();
 
+                //Validation inputs
+                if (amountStr.isEmpty()){
+                    addBinding.amount.setError("Amount is required");
+                    return;
+                }
 
+                double amount;
+                try {
+                    amount = Double.parseDouble(amountStr);
+                    if (amount <= 0){
+                        addBinding.amount.setError("Amount must be greater than 0");
+                        return;
+                    }
+                } catch (NumberFormatException e) {
+                    addBinding.amount.setError("Invalid amount");
+                    return;
+                }
+
+
+                //Get Transaction Type
+                String type = "INCOME";
                 if (transModel.getType().equals("Expense")){
-                    transModel.setAmount(amount* -1);
+                    type = "EXPENSE";
+//                    transModel.setAmount(amount* -1);
                 }
-                else {
-                    transModel.setAmount(amount);
-                }
+//                else {
+//                    transModel.setAmount(amount);
+//                }
 
-                ((MainActivity)getActivity()).transViewModel.addNewTrans(transModel);
-                ((MainActivity)getActivity()).transViewModel.getTransactionList(calendar);
+
+                //Create Transaction
+                TransactionModel transactionModel = new TransactionModel(type, category, amount, note, new Date());
+
+                ((MainActivity)getActivity()).transViewModel.addNewTrans(transactionModel);
+                ((MainActivity)getActivity()).transViewModel.getTransactionList();
                 dismiss();
             }
         });

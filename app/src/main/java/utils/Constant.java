@@ -14,6 +14,12 @@ public class Constant {
 
     public static ArrayList<CategoryModel> categories;
 
+
+    public static int DAILY = 0;
+    public static int MONTHLY = 1;
+    public static int CALENDAR = 2;
+    public static int SUMMARY = 3;
+
     public static void setCategories(){
 
         categories = new ArrayList<>();

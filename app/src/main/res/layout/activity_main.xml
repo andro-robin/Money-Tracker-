@@ -116,7 +116,7 @@
 
                 <!-- Left Arrow -->
                 <ImageView
-                    android:id="@+id/leftArrow"
+                    android:id="@+id/navigatePreviousDate"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_marginStart="16dp"
@@ -137,16 +137,16 @@
                     android:textStyle="bold"
                     android:text=""
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/rightArrow"
+                    app:layout_constraintEnd_toStartOf="@+id/navigateNextDate"
                     app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/leftArrow"
+                    app:layout_constraintStart_toEndOf="@+id/navigatePreviousDate"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0" />
 
 
                 <!-- Right Arrow -->
                 <ImageView
-                    android:id="@+id/rightArrow"
+                    android:id="@+id/navigateNextDate"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_marginEnd="16dp"
@@ -317,11 +317,11 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/list_expense"
+                        android:id="@+id/transactionCount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins"
-                        android:text="Expense: "
+                        android:text="Transactions: "
                         android:textColor="@color/black"
                         android:textSize="15sp"
                         android:textStyle="bold" />
@@ -348,20 +348,29 @@
                 tools:ignore="MissingConstraints"
                 android:layout_marginTop="10dp"/>
 
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="70dp"
+                android:id="@+id/emptyView"
+                android:layout_gravity="center"
+                android:src="@drawable/outline_brightness_empty_24"
+                android:visibility="invisible"/>
+
 
         </LinearLayout>
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/frameLayout"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:ignore="MissingConstraints" />
+
 
     </LinearLayout>
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/frameLayout"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints" />
 
     <com.google.android.material.bottomappbar.BottomAppBar
         android:layout_width="match_parent"

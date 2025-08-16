@@ -1,9 +1,11 @@
 package com.devrobin.moneytracker.Views.activity;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -47,6 +49,7 @@ import java.util.List;
 import java.util.Locale;
 
 import utils.Constant;
+import utils.DailySummer;
 
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
@@ -55,10 +58,12 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
     private ListView srchClndrList;
     private ArrayAdapter<String> searchAdapter;
-    private String[] srchListName = {"Food", "Shopping", "Transport", "Rikshaw", "Bus", "Loan"};
     private Toolbar toolbar;
-    private Calendar calendar;
+
     public TransViewModel transViewModel;
+    private TransactionAdapter transAdapter;
+
+    private TransactionAdapter.onTransItemClickListener transItemClickListener;
 
     private ArrayList<TransactionModel> transModelList;
 
@@ -75,10 +80,17 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     private AddTransaction addTransaction = new AddTransaction();
 
 
+
     private long transId;
     private int Edit_Trans_RequestCode = 1;
 
 
+    // Calendar & Date
+    private SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMMM, yyyy", Locale.getDefault());
+    private SimpleDateFormat dayDateFormate = new SimpleDateFormat("EEE", Locale.getDefault());
+    private Calendar calendar = Calendar.getInstance();
+
+    private String selectedDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,15 +100,16 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        //Important Component
         transViewModel = new ViewModelProvider(this).get(TransViewModel.class);
 
         toolbar = findViewById(R.id.mainToolbar);
         setSupportActionBar(toolbar);
 
-
         Constant.setCategories();
 
 
+        //Find Id
         actionButton = findViewById(R.id.addFloadBtn);
         navigationView = findViewById(R.id.bottom_navigation);
         navigationView.setOnNavigationItemSelectedListener(this);
@@ -104,70 +117,50 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
 //
         srchClndrList = findViewById(R.id.search_calendar);
-        searchAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, srchListName);
+        searchAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
         srchClndrList.setAdapter(searchAdapter);
 
 
         //BottomSheetDialogFragment
         actionButton.setOnClickListener(v -> {
-//            getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, addTransaction).commit();
             new AddTransaction().show(getSupportFragmentManager(), null);
         });
 
-
-        //SetUp Calendar
-        calendar = Calendar.getInstance();
-
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMMM, yyyy", Locale.getDefault());
-        binding.currentDate.setText(dateFormat.format(calendar.getTime()));
-
-        binding.leftArrow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                calendar.add(Calendar.DATE, -1);
-                updateCalendar();
-
-            }
-        });
-
-        binding.rightArrow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                calendar.add(Calendar.DATE, 1);
-                updateCalendar();
-            }
-        });
-
-
-        TransactionModel transModel;
-
-        ArrayList<TransactionModel> transList = new ArrayList<>();
-//        transList.add(new TransactionModel("Income", "Salary", 900.0, new Date(), 0));
-//        transList.add(new TransactionModel("Income", "Business", 900.0, "date", 1));
-//        transList.add(new TransactionModel("Expense", "Shopping", -600, "date", 2));
-//        transList.add(new TransactionModel("Expense", "Bike", -700, "date", 3));
-
-//        TransactionAdapter transAdapter = new TransactionAdapter(this, new ArrayList<>() , new TransactionAdapter.onTransItemClickListener() {
-//            @Override
-//            public void onTransItemClick(TransactionModel transactionModel) {
-//
-//            }
-//        });
-//
-//        binding.recycleViewList.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-//        binding.recycleViewList.setHasFixedSize(true);
-//        binding.recycleViewList.setAdapter(transAdapter);
-
-
+        //ViewModel & and RecycleView
         loadTransViewModel();
+
+        //ViewModel for DateBase Transaction
+        setUpDateForTransactions();
+
+        binding.navigatePreviousDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                transViewModel.navigateToPreviousDate();
+            }
+        });
+
+        binding.navigateNextDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                transViewModel.navigateToNextDate();
+            }
+        });
+
+        binding.currentDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showDatePicker();
+            }
+        });
 
 
     }
 
+
+    // ViewModel for RecycleView
     private void loadTransViewModel() {
 
-        transViewModel.getTransactionList(calendar).observe(this, new Observer<List<TransactionModel>>() {
+        transViewModel.getTransactionList().observe(this, new Observer<List<TransactionModel>>() {
             @Override
             public void onChanged(List<TransactionModel> transactionModels) {
 
@@ -179,32 +172,15 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
     }
 
+    //Load Transaction in RecycleView
     private void loadRecycleView() {
 
-        TransactionAdapter transAdapter = new TransactionAdapter(this, new ArrayList<>(), new TransactionAdapter.onTransItemClickListener() {
-            @Override
-            public void onTransItemClick(TransactionModel transModel) {
-
-
-                if (transModel != null){
-
-                    transId = transModel.getTransId();
-
-                    Intent goEditActivity = new Intent(getApplicationContext(), EditDeleteActivity.class);
-
-
-                    startActivity(goEditActivity);
-                    transViewModel.updateOldTrans(transModel);
-                }
-
-            }
-        });
+        transAdapter = new TransactionAdapter(this, new ArrayList<>(), transItemClickListener);
 
         binding.recycleViewList.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         binding.recycleViewList.setHasFixedSize(true);
         binding.recycleViewList.setAdapter(transAdapter);
         transAdapter.setTransList(transModelList);
-
 
 
 
@@ -225,13 +201,73 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
     }
 
-    private void updateCalendar() {
+    //ViewModel For DateBase Transactions setUp
+    public void setUpDateForTransactions(){
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMMM, yyyy", Locale.getDefault());
-        binding.currentDate.setText(dateFormat.format(calendar.getTime()));
+        //Observe Selected Date Changes
+        transViewModel.getSelectedDate().observe(this, new Observer<Date>() {
+            @Override
+            public void onChanged(Date date) {
+                if (date != null){
+                    updateDateDisplay(date);
+                }
+            }
+        });
+
+
+        //Observe transaction
+        transViewModel.getTransactionList().observe(this, new Observer<List<TransactionModel>>() {
+            @Override
+            public void onChanged(List<TransactionModel> transactionModels) {
+
+                //Check Here transactionModel dont null value
+                if (transactionModels != null && !transactionModels.isEmpty()){
+
+                    transAdapter.setTransList(transModelList);
+                    binding.recycleViewList.setVisibility(View.VISIBLE);
+                    binding.emptyView.setVisibility(View.GONE);
+
+                }
+                else {
+                    binding.recycleViewList.setVisibility(View.GONE);
+                    binding.emptyView.setVisibility(View.VISIBLE);
+                }
+
+            }
+        });
+
+
+        //Observe Daily Summery
+        transViewModel.getDailySummery().observe(this, new Observer<DailySummer>() {
+            @Override
+            public void onChanged(DailySummer dailySummer) {
+                if (dailySummer != null){
+                    updateDailySummery(dailySummer);
+                }
+            }
+        });
+
 
     }
 
+    @SuppressLint("DefaultLocale")
+    private void updateDailySummery(DailySummer dailySummer) {
+
+        binding.incomeMoney.setText(String.format("%.0f", dailySummer.getTotalIncome()));
+        binding.expenseMoney.setText(String.format("%.0f", dailySummer.getTotalExpense()));
+        binding.balanceMoney.setText(String.format("%.0f", dailySummer.getTotalBalance()));
+
+
+        binding.transactionCount.setText(String.format("%d", dailySummer.getTransactionCount()));
+
+    }
+
+    private void updateDateDisplay(Date date) {
+        binding.currentDate.setText(dateFormat.format(date));
+    }
+
+
+    //BottomView Menu Items
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 
@@ -240,7 +276,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
         if (itemId == R.id.charts){
             getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, transactionChart).commit();
-                return true;
+            return true;
         }
         else if (itemId == R.id.reports){
             getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, transactionReports).commit();
@@ -336,19 +372,27 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     private void showDatePicker() {
 
         Calendar calendar = Calendar.getInstance();
-        int year = calendar.get(Calendar.YEAR);
-        int month = calendar.get(Calendar.MONTH);
-        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        Date currentDate = transViewModel.getSelectedDate().getValue();
+        if (currentDate != null){
+            calendar.setTime(currentDate);
+        }
 
 
         DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
-            public void onDateSet(DatePicker datePicker, int selectYear, int selectMnth, int selectDay) {
+            public void onDateSet(DatePicker datePicker, int day, int month, int year) {
 
-                String selectDate = selectYear + "/" + (selectMnth + 1) + "/" + selectDay;
+                calendar.set(day, month, year);
+                transViewModel.setSelectedDate(calendar.getTime());
 
             }
-        }, year, month, day);
+        },
+                calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH)
+                );
+
+        datePickerDialog.show();
 
     }
 

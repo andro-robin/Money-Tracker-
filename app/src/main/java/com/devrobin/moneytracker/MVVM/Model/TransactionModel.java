@@ -11,6 +11,9 @@ import java.util.Date;
 @Entity(tableName = "transaction_table")
 public class TransactionModel {
 
+    @PrimaryKey(autoGenerate = true)
+    private int transId;
+
     @ColumnInfo(name = "type")
     private String type;
 
@@ -23,22 +26,46 @@ public class TransactionModel {
     @ColumnInfo(name = "note")
     private String note;
 
-    @ColumnInfo(name = "currentDate")
-    public String currentDate;
+    @ColumnInfo(name = "transactionDate")
+    private Date transactionDate;
 
-    @PrimaryKey(autoGenerate = true)
-    private long transId;
+    @ColumnInfo(name = "createDate")
+    private Date createDate;
 
-    @Ignore
+
     public TransactionModel() {
     }
 
-    public TransactionModel(String type, String category, double amount, String note, String currentDate, long transId) {
+    //Constructor for use saving trans;
+    public TransactionModel(String type, String category, double amount, String note, Date transactionDate) {
+
         this.type = type;
         this.category = category;
         this.amount = amount;
         this.note = note;
-        this.currentDate = currentDate;
+        this.transactionDate = transactionDate;
+        this.createDate = new Date();
+        this.transId = 0;
+
+    }
+
+    //Full Constructor
+    public TransactionModel(int transId, String type, String category, double amount, String note, Date transactionDate, Date createDate) {
+        this.transId = transId;
+        this.type = type;
+        this.category = category;
+        this.amount = amount;
+        this.note = note;
+        this.transactionDate = transactionDate;
+        this.createDate = createDate;
+    }
+
+
+    public int getTransId() {
+        return transId;
+    }
+
+    public void setTransId(int transId) {
         this.transId = transId;
     }
 
@@ -74,19 +101,19 @@ public class TransactionModel {
         this.note = note;
     }
 
-    public String getCurrentDate() {
-        return currentDate;
+    public Date getTransactionDate() {
+        return transactionDate;
     }
 
-    public void setCurrentDate(String currentDate) {
-        this.currentDate = currentDate;
+    public void setTransactionDate(Date transactionDate) {
+        this.transactionDate = transactionDate;
     }
 
-    public long getTransId() {
-        return transId;
+    public Date getCreateDate() {
+        return createDate;
     }
 
-    public void setTransId(long transId) {
-        this.transId = transId;
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 }
