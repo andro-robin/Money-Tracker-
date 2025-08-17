@@ -50,6 +50,7 @@ import java.util.Locale;
 
 import utils.Constant;
 import utils.DailySummer;
+import utils.MonthlySummary;
 
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
@@ -247,18 +248,41 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             }
         });
 
+        transViewModel.getMonthlySummary().observe(this, new Observer<MonthlySummary>() {
+            @Override
+            public void onChanged(MonthlySummary monthlySummary) {
+                if (monthlySummary != null){
+                    updateMonthlySummary(monthlySummary);
+                }
+            }
+        });
+
+
+    }
+
+    @SuppressLint("DefaultLocale")
+    private void updateMonthlySummary(MonthlySummary monthlySummary) {
+
+//       if (monthlySummary != null){
+
+//           double monthlyBalance = monthlySummary.getMonthlyIncome() - monthlySummary.getMonthlyExpense();
+
+           binding.monthlyIncomeAmount.setText(String.format("%.0f", monthlySummary.getMonthlyIncome()));
+           binding.monthlyExpenseAmount.setText(String.format("%.0f", monthlySummary.getMonthlyExpense()));
+           binding.monthlyBalanceAmount.setText(String.format("%.0f", monthlySummary.getMonthlyBalance()));
+
+//       }
 
     }
 
     @SuppressLint("DefaultLocale")
     private void updateDailySummery(DailySummer dailySummer) {
 
-        binding.incomeMoney.setText(String.format("%.0f", dailySummer.getTotalIncome()));
-        binding.expenseMoney.setText(String.format("%.0f", dailySummer.getTotalExpense()));
-        binding.balanceMoney.setText(String.format("%.0f", dailySummer.getTotalBalance()));
+        binding.dailyIncomeAmount.setText(String.format("%.0f", dailySummer.getTotalIncome()));
+        binding.dailyExpenseAmount.setText(String.format("%.0f", dailySummer.getTotalExpense()));
 
 
-        binding.transactionCount.setText(String.format("%d", dailySummer.getTransactionCount()));
+        binding.totalTransaction.setText(String.format("%d", dailySummer.getTransactionCount()));
 
     }
 

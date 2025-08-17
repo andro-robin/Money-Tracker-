@@ -18,6 +18,7 @@ import java.util.List;
 
 import kotlin.jvm.functions.Function1;
 import utils.DailySummer;
+import utils.MonthlySummary;
 
 public class TransViewModel extends AndroidViewModel {
 
@@ -25,7 +26,8 @@ public class TransViewModel extends AndroidViewModel {
 
     private MutableLiveData<Date> selectedDate;
     private LiveData<List<TransactionModel>> transactionList;
-    private LiveData<DailySummer> dailySummery;
+    private LiveData<DailySummer> dailySummary;
+    private LiveData<MonthlySummary> monthlySummary;
 
 
     public TransViewModel(@NonNull Application application) {
@@ -53,7 +55,7 @@ public class TransViewModel extends AndroidViewModel {
             }
         });
 
-        dailySummery = Transformations.switchMap(selectedDate, new Function1<Date, LiveData<DailySummer>>() {
+        dailySummary = Transformations.switchMap(selectedDate, new Function1<Date, LiveData<DailySummer>>() {
             @Override
             public LiveData<DailySummer> invoke(Date date) {
                 if (date != null){
@@ -64,6 +66,16 @@ public class TransViewModel extends AndroidViewModel {
             }
         });
 
+        monthlySummary = Transformations.switchMap(selectedDate, new Function1<Date, LiveData<MonthlySummary>>() {
+            @Override
+            public LiveData<MonthlySummary> invoke(Date date) {
+                if (date != null){
+                    return transRepository.getMonthlySummer(date);
+                }
+
+                return new MutableLiveData<>(new MonthlySummary());
+            }
+        });
 
     }
 
@@ -83,7 +95,12 @@ public class TransViewModel extends AndroidViewModel {
 
     //get Daily Summery
     public LiveData<DailySummer> getDailySummery(){
-        return dailySummery;
+        return dailySummary;
+    }
+
+    //Get Monthly Summary
+    public LiveData<MonthlySummary> getMonthlySummary(){
+        return monthlySummary;
     }
 
     //Get Current Selected Date

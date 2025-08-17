@@ -17,6 +17,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import utils.DailySummer;
+import utils.MonthlySummary;
 
 public class TransRepository{
 
@@ -41,6 +42,10 @@ public class TransRepository{
 
     public LiveData<DailySummer> getDailySummer(Date date){
         return transDao.getDailySummery(date.getTime());
+    }
+
+    public LiveData<MonthlySummary> getMonthlySummer(Date date){
+        return transDao.getMonthlySummary(date.getTime());
     }
 
     public LiveData<List<TransactionModel>> getAllTransaction(){

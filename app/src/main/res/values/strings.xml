@@ -24,9 +24,9 @@
     <!--    Home Page-->
     <string name="profile_name">Devid Watt</string>
     <string name="date">2025 <br>May</br> </string>
-    <string name="income">Income</string>
+    <string name="income">Income: </string>
     <string name="income_money">6000</string>
-    <string name="expense">Expense</string>
+    <string name="expense">Expense: </string>
     <string name="expense_money">2300</string>
     <string name="Balance">10000</string>
 
@@ -95,6 +95,7 @@
     <string name="crossBtn">⌫</string>
     <string name="calendarBtn">📅 Today</string>
     <string name="saveBtn">✓</string>
+    <string name="transactions">Transactions: </string>
 
 
 </resources>
