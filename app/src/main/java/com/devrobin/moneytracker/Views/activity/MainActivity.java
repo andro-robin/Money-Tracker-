@@ -225,12 +225,12 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
                     transAdapter.setTransList(transModelList);
                     binding.recycleViewList.setVisibility(View.VISIBLE);
-                    binding.emptyView.setVisibility(View.GONE);
+                    binding.emptyViewLayout.setVisibility(View.GONE);
 
                 }
                 else {
                     binding.recycleViewList.setVisibility(View.GONE);
-                    binding.emptyView.setVisibility(View.VISIBLE);
+                    binding.emptyViewLayout.setVisibility(View.VISIBLE);
                 }
 
             }
@@ -264,6 +264,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
     private void updateDateDisplay(Date date) {
         binding.currentDate.setText(dateFormat.format(date));
+        binding.nameOfDay.setText(dayDateFormate.format(date));
     }
 
 

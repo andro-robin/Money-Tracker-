@@ -134,6 +134,7 @@ public class TransViewModel extends AndroidViewModel {
 
     //addNew Transaction
     public void addNewTrans(TransactionModel transModel){
+        transModel.setTransactionDate(selectedDate.getValue());
         transRepository.InsertTrans(transModel);
     }
 

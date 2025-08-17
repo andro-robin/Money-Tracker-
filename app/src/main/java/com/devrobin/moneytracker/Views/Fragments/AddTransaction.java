@@ -46,15 +46,8 @@ public class AddTransaction extends BottomSheetDialogFragment {
 
     //Widget
     private FragmentAddTransactionBinding addBinding;
-    private RecyclerView recyclerView;
-    private TextView expenseBtn, incomeBtn;
-    private CalculatorBottomSheet bottomSheet;
-    private FragmentManager fragmentManager;
 
     private CategoryAdapter categoryAdapter;
-    private CategoryModel ctgryModel;
-//    private ArrayList<CategoryModel> categoryList = new ArrayList<>();
-
     private TransactionModel transModel;
 
 
@@ -67,12 +60,13 @@ public class AddTransaction extends BottomSheetDialogFragment {
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener authStateListener;
 
-    private String selectedDate;
-
+    private Date selectedDate;
+//
 
     public AddTransaction() {
         // Required empty public constructor
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -95,6 +89,12 @@ public class AddTransaction extends BottomSheetDialogFragment {
 
             }
         };
+
+
+        selectedDate = ((MainActivity)getActivity()).transViewModel.getSelectedDate().getValue();
+        if (selectedDate == null) {
+            selectedDate = new Date(); // fallback to current date
+        }
 
 
 //        Income & Expense Btn
@@ -263,9 +263,19 @@ public class AddTransaction extends BottomSheetDialogFragment {
 //                    transModel.setAmount(amount);
 //                }
 
+                Date transactionDate = selectedDate != null ? selectedDate : new Date();
+
+                Calendar selectedDate = Calendar.getInstance();
+                selectedDate.setTime(transactionDate);
+
+                Calendar currentDate = Calendar.getInstance();
+                selectedDate.set(Calendar.HOUR_OF_DAY, currentDate.get(Calendar.HOUR_OF_DAY));
+                selectedDate.set(Calendar.MINUTE, currentDate.get(Calendar.MINUTE));
+                selectedDate.set(Calendar.SECOND, currentDate.get(Calendar.SECOND));
+                selectedDate.set(Calendar.MILLISECOND, currentDate.get(Calendar.MILLISECOND));
 
                 //Create Transaction
-                TransactionModel transactionModel = new TransactionModel(type, category, amount, note, new Date());
+                TransactionModel transactionModel = new TransactionModel(type, category, amount, note, selectedDate.getTime());
 
                 ((MainActivity)getActivity()).transViewModel.addNewTrans(transactionModel);
                 ((MainActivity)getActivity()).transViewModel.getTransactionList();
@@ -275,5 +285,9 @@ public class AddTransaction extends BottomSheetDialogFragment {
 
 
         return addBinding.getRoot();
+    }
+
+    public void setSelectedDate(Date selectedDate){
+        this.selectedDate = selectedDate;
     }
 }

@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.devrobin.moneytracker.MVVM.Model.CategoryModel;
@@ -55,8 +56,8 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
             holder.itemsBinding.categoryNote.setText(transModel.getCategory());
         }
 
-        holder.itemsBinding.categoryAmount.setText(String.valueOf(transModel.getAmount()));
-//        holder.itemsBinding.date.setText(Helper.setDateFormate(transModel.getCurrentDate()));
+//        holder.itemsBinding.categoryAmount.setText(String.valueOf(transModel.getAmount()));
+//        holder.itemsBinding.date.setText(Helper.setDateFormate(transModel.getTransactionDate()));
 
         //Date Formatting
         Date transactionDate = transModel.getTransactionDate();
@@ -76,15 +77,33 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
             holder.itemsBinding.categoryIcons.setBackgroundTintList(context.getColorStateList(R.color.blue));
         }
 
+        // Safe amount and type handling
+        String type = transModel.getType();
+        double amount = transModel.getAmount();
 
-
-        //Set Income and Expense Type
-        if (transModel.getType().equals("Income")){
+        // Use Yoda conditions (literal first) to avoid NullPointerException
+        if ("INCOME".equals(type)) {
+            holder.itemsBinding.categoryAmount.setText(String.format("+%.1f", amount));
             holder.itemsBinding.categoryAmount.setTextColor(context.getColor(R.color.blue));
         }
-        else if (transModel.getType().equals("Expense")){
+        else if ("EXPENSE".equals(type)) {
+            holder.itemsBinding.categoryAmount.setText(String.format("-%.1f", amount));
             holder.itemsBinding.categoryAmount.setTextColor(context.getColor(R.color.red));
         }
+        else {
+            // Handle unknown or null type
+            holder.itemsBinding.categoryAmount.setText(String.format("%.1f", amount));
+            holder.itemsBinding.categoryAmount.setTextColor(context.getColor(R.color.black));
+        }
+
+
+//        //Set Income and Expense Type
+//        if (transModel.getType().equals("Income")){
+//            holder.itemsBinding.categoryAmount.setTextColor(context.getColor(R.color.blue));
+//        }
+//        else if (transModel.getType().equals("Expense")){
+//            holder.itemsBinding.categoryAmount.setTextColor(context.getColor(R.color.red));
+//        }
 
 
     }
