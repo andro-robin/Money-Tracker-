@@ -59,6 +59,9 @@ dependencies {
     //BottomNavigation Bar
     implementation 'com.google.android.material:material:1.11.0'
 
+    //ViewModel LifeCycle
+    implementation 'androidx.lifecycle:lifecycle-viewmodel:2.6.2'
+    implementation 'androidx.lifecycle:lifecycle-livedata:2.6.2'
 
     //RoomDatabase
     //Room DataBaset
@@ -69,5 +72,10 @@ dependencies {
     annotationProcessor "androidx.room:room-compiler:$room_version"
 
 
+
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+
+
+    implementation 'joda-time:joda-time:2.10.14'
 
 }

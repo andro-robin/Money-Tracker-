@@ -5,8 +5,8 @@ import android.os.Handler;
 import android.os.Looper;
 
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 
+import com.devrobin.moneytracker.MVVM.Model.CategoryChartData;
 import com.devrobin.moneytracker.MVVM.Model.TransactionModel;
 import com.devrobin.moneytracker.MVVM.TransactionDao;
 import com.devrobin.moneytracker.MVVM.TransactionDatabase;
@@ -16,8 +16,11 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import utils.DailyChartData;
 import utils.DailySummer;
+import utils.MonthlyChartData;
 import utils.MonthlySummary;
+import utils.YearlyChartData;
 
 public class TransRepository{
 
@@ -51,6 +54,22 @@ public class TransRepository{
     public LiveData<List<TransactionModel>> getAllTransaction(){
         return transDao.getAllTransaction();
     }
+
+
+    //Chart Methods
+    public LiveData<List<CategoryChartData>> getCategoryChartData(Date date) {
+        return transDao.getCategoryChartData(date.getTime());
+    }
+
+    public LiveData<List<DailyChartData>> getDailyChartData(Date date) {
+        return transDao.getDailyChartData(date.getTime());
+    }
+
+    public LiveData<List<MonthlyChartData>> getMonthlyChartData(Date date) {
+        return transDao.getMonthlyChartData(date.getTime());
+    }
+
+
 
 
 

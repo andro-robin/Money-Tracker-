@@ -8,13 +8,17 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
+import com.devrobin.moneytracker.MVVM.Model.CategoryChartData;
 import com.devrobin.moneytracker.MVVM.Model.TransactionModel;
 
 
 import java.util.List;
 
+import utils.DailyChartData;
 import utils.DailySummer;
+import utils.MonthlyChartData;
 import utils.MonthlySummary;
+import utils.YearlyChartData;
 
 @Dao
 public interface TransactionDao {
@@ -57,5 +61,72 @@ public interface TransactionDao {
 
     @Query("DELETE FROM transaction_table")
     void deleteAllTransactions();
+
+
+////    / Daily chart data for current month
+//    @Query("SELECT " +
+//            "DATE(transactionDate/1000, 'unixepoch') as date, " +
+//            "COALESCE(SUM(CASE WHEN type = 'INCOME' THEN amount ELSE 0 END), 0) as income, " +
+//            "COALESCE(SUM(CASE WHEN type = 'EXPENSE' THEN amount ELSE 0 END), 0) as expense " +
+//            "FROM transaction_table " +
+//            "WHERE strftime('%Y-%m', transactionDate/1000, 'unixepoch') = strftime('%Y-%m', :date/1000, 'unixepoch') " +
+//            "GROUP BY DATE(transactionDate/1000, 'unixepoch') " +
+//            "ORDER BY DATE(transactionDate/1000, 'unixepoch')")
+//    LiveData<List<DailyChartData>> getDailyChartData(long date);
+//
+//    // Monthly chart data for current year
+//    @Query("SELECT " +
+//            "strftime('%Y-%m', transactionDate/1000, 'unixepoch') as month, " +
+//            "COALESCE(SUM(CASE WHEN type = 'INCOME' THEN amount ELSE 0 END), 0) as income, " +
+//            "COALESCE(SUM(CASE WHEN type = 'EXPENSE' THEN amount ELSE 0 END), 0) as expense " +
+//            "FROM transaction_table " +
+//            "WHERE strftime('%Y', transactionDate/1000, 'unixepoch') = strftime('%Y', :date/1000, 'unixepoch') " +
+//            "GROUP BY strftime('%Y-%m', transactionDate/1000, 'unixepoch') " +
+//            "ORDER BY strftime('%Y-%m', transactionDate/1000, 'unixepoch')")
+//    LiveData<List<MonthlyChartData>> getMonthlyChartData(long date);
+//
+//    // Yearly chart data
+//    @Query("SELECT " +
+//            "strftime('%Y', transactionDate/1000, 'unixepoch') as year, " +
+//            "COALESCE(SUM(CASE WHEN type = 'INCOME' THEN amount ELSE 0 END), 0) as income, " +
+//            "COALESCE(SUM(CASE WHEN type = 'EXPENSE' THEN amount ELSE 0 END), 0) as expense " +
+//            "FROM transaction_table " +
+//            "GROUP BY strftime('%Y', transactionDate/1000, 'unixepoch') " +
+//            "ORDER BY strftime('%Y', transactionDate/1000, 'unixepoch')")
+//    LiveData<List<YearlyChartData>> getYearlyChartData();
+
+
+// Category wise data for pie chart
+@Query("SELECT category, " +
+        "SUM(CASE WHEN type = 'INCOME' THEN amount ELSE 0 END) as income, " +
+        "SUM(CASE WHEN type = 'EXPENSE' THEN amount ELSE 0 END) as expense " +
+        "FROM transaction_table " +
+        "WHERE strftime('%Y-%m', transactionDate/1000, 'unixepoch') = strftime('%Y-%m', :date/1000, 'unixepoch') " +
+        "GROUP BY category " +
+        "HAVING (income > 0 OR expense > 0) " +
+        "ORDER BY (income + expense) DESC")
+LiveData<List<CategoryChartData>> getCategoryChartData(long date);
+
+    // Daily data for current month
+    @Query("SELECT DATE(transactionDate/1000, 'unixepoch') as date, " +
+            "SUM(CASE WHEN type = 'INCOME' THEN amount ELSE 0 END) as income, " +
+            "SUM(CASE WHEN type = 'EXPENSE' THEN amount ELSE 0 END) as expense " +
+            "FROM transaction_table " +
+            "WHERE strftime('%Y-%m', transactionDate/1000, 'unixepoch') = strftime('%Y-%m', :date/1000, 'unixepoch') " +
+            "GROUP BY DATE(transactionDate/1000, 'unixepoch') " +
+            "HAVING (income > 0 OR expense > 0) " +
+            "ORDER BY DATE(transactionDate/1000, 'unixepoch')")
+    LiveData<List<DailyChartData>> getDailyChartData(long date);
+
+    // Monthly data for current year
+    @Query("SELECT strftime('%Y-%m', transactionDate/1000, 'unixepoch') as month, " +
+            "SUM(CASE WHEN type = 'INCOME' THEN amount ELSE 0 END) as income, " +
+            "SUM(CASE WHEN type = 'EXPENSE' THEN amount ELSE 0 END) as expense " +
+            "FROM transaction_table " +
+            "WHERE strftime('%Y', transactionDate/1000, 'unixepoch') = strftime('%Y', :date/1000, 'unixepoch') " +
+            "GROUP BY strftime('%Y-%m', transactionDate/1000, 'unixepoch') " +
+            "HAVING (income > 0 OR expense > 0) " +
+            "ORDER BY strftime('%Y-%m', transactionDate/1000, 'unixepoch')")
+    LiveData<List<MonthlyChartData>> getMonthlyChartData(long date);
 
 }
