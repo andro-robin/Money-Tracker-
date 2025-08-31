@@ -25,9 +25,24 @@ public class Constant {
         categories = new ArrayList<>();
 
         categories.add(new CategoryModel("Salary", R.drawable.food));
-        categories.add(new CategoryModel("Business", R.drawable.food));
-        categories.add(new CategoryModel("Shopping", R.drawable.food));
-        categories.add(new CategoryModel("Bike", R.drawable.food));
+        categories.add(new CategoryModel("Business", R.drawable.investment));
+        categories.add(new CategoryModel("Shopping", R.drawable.shopping));
+        categories.add(new CategoryModel("Bike", R.drawable.bike));
+        categories.add(new CategoryModel("Travel", R.drawable.travel));
+        categories.add(new CategoryModel("Rent", R.drawable.rent));
+        categories.add(new CategoryModel("Electronics", R.drawable.electronics));
+        categories.add(new CategoryModel("Clothing", R.drawable.clothing));
+        categories.add(new CategoryModel("Health", R.drawable.health));
+        categories.add(new CategoryModel("Pet", R.drawable.pet));
+        categories.add(new CategoryModel("Gifts", R.drawable.gift));
+        categories.add(new CategoryModel("Phone", R.drawable.phone));
+        categories.add(new CategoryModel("Beauty", R.drawable.beauty));
+        categories.add(new CategoryModel("Social", R.drawable.social));
+        categories.add(new CategoryModel("Sport", R.drawable.sports));
+        categories.add(new CategoryModel("Housing", R.drawable.house));
+        categories.add(new CategoryModel("Market", R.drawable.market));
+        categories.add(new CategoryModel("Others", R.drawable.others));
+
 
 
     }

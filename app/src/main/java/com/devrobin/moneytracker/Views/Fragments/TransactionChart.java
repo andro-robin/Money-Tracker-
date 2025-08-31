@@ -132,7 +132,7 @@ public class TransactionChart extends Fragment {
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, timeRangeOptions);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         chartBinding.periodSpinner.setAdapter(arrayAdapter);
-        chartBinding.periodSpinner.setSelection(1);
+        chartBinding.periodSpinner.setSelection(0);
         chartBinding.periodSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
@@ -175,7 +175,10 @@ public class TransactionChart extends Fragment {
             }
         });
 
-        chartBinding.periodLists.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+
+        layoutManager.setStackFromEnd(true);
+        chartBinding.periodLists.setLayoutManager(layoutManager);
         chartBinding.periodLists.setAdapter(chipAdapter);
 
         // populate initial chips

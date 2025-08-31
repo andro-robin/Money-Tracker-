@@ -8,7 +8,7 @@ import androidx.lifecycle.LiveData;
 
 import com.devrobin.moneytracker.MVVM.Model.CategoryChartData;
 import com.devrobin.moneytracker.MVVM.Model.TransactionModel;
-import com.devrobin.moneytracker.MVVM.TransactionDao;
+import com.devrobin.moneytracker.MVVM.DAO.TransactionDao;
 import com.devrobin.moneytracker.MVVM.TransactionDatabase;
 
 import java.util.Date;
@@ -20,7 +20,6 @@ import utils.DailyChartData;
 import utils.DailySummer;
 import utils.MonthlyChartData;
 import utils.MonthlySummary;
-import utils.YearlyChartData;
 
 public class TransRepository{
 

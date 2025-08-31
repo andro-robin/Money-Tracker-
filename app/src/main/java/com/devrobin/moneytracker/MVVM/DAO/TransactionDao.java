@@ -1,7 +1,6 @@
-package com.devrobin.moneytracker.MVVM;
+package com.devrobin.moneytracker.MVVM.DAO;
 
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -18,7 +17,6 @@ import utils.DailyChartData;
 import utils.DailySummer;
 import utils.MonthlyChartData;
 import utils.MonthlySummary;
-import utils.YearlyChartData;
 
 @Dao
 public interface TransactionDao {

@@ -16,6 +16,27 @@
         android:theme="@style/Theme.MoneyTracker"
         tools:ignore="MissingClass">
         <activity
+            android:name=".Views.activity.AddAndEditAccount"
+            android:exported="false" />
+        <activity
+            android:name=".Views.activity.UsersFeedBack"
+            android:exported="false" />
+        <activity
+            android:name=".Views.activity.TermsAndConditions"
+            android:exported="false" />
+        <activity
+            android:name=".Views.activity.PrivacyAndPolicy"
+            android:exported="false" />
+        <activity
+            android:name=".Views.activity.CategorySettings"
+            android:exported="false" />
+        <activity
+            android:name=".Views.activity.DeleteAllData"
+            android:exported="false" />
+        <activity
+            android:name=".Views.activity.AccountManagement"
+            android:exported="false" />
+        <activity
             android:name=".Views.activity.EditDeleteActivity"
             android:exported="false" />
         <activity

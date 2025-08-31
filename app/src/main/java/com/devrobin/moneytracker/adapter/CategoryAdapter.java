@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.devrobin.moneytracker.MVVM.Model.CategoryModel;
 
 import com.devrobin.moneytracker.R;
+import com.devrobin.moneytracker.databinding.ActivityCategorySettingsBinding;
 import com.devrobin.moneytracker.databinding.CategoryListItemsBinding;
 
 import java.util.ArrayList;
@@ -30,8 +31,10 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     @NonNull
     @Override
     public CategoryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        CategoryListItemsBinding listItemsBinding = CategoryListItemsBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
-        return new CategoryViewHolder(listItemsBinding);
+
+            CategoryListItemsBinding listItemsBinding = CategoryListItemsBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+            return new CategoryViewHolder(listItemsBinding);
+
     }
 
     @Override
@@ -98,5 +101,17 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     public void setCategoryList(ArrayList<CategoryModel> categoryList) {
         this.categoryList = categoryList;
         notifyDataSetChanged();
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+
+        if (position % 2 == 0){
+            return 0;
+        }
+        else {
+            return 1;
+        }
+
     }
 }

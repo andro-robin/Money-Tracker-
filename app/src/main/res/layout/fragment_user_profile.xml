@@ -1,332 +1,782 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<LinearLayout
+
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Views.Fragments.UserProfile"
     android:id="@+id/userProfFragment"
-    android:background="@color/white">
+    android:background="@color/white"
+    android:orientation="vertical">
 
-    <LinearLayout
-        android:id="@+id/addTrans_Container"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:weightSum="4">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Add Transaction"
-            android:gravity="center"
-            android:textSize="20dp"
-            android:fontFamily="@font/poppins"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            android:layout_marginBottom="25dp"
-            android:layout_weight="1"/>
+        android:layout_height="wrap_content"
+        android:fillViewport="true"
+        tools:ignore="ScrollViewCount">
 
         <LinearLayout
-            android:id="@+id/btnLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center"
-            android:layout_weight="1">
+            android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/expenseBtn"
-                android:text="@string/expense"
-                android:textSize="20sp"
-                android:fontFamily="@font/poppins"
-                android:textStyle="bold"
-                android:textColor="@color/black"
-                android:background="@drawable/defaultbtn_bg"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/incomeBtn"
-                android:text="@string/income"
-                android:textSize="20sp"
-                android:fontFamily="@font/poppins"
-                android:textStyle="bold"
-                android:textColor="@color/black"
-                android:background="@drawable/defaultbtn_bg"/>
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/categoryContainer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:padding="20dp"
-            android:orientation="vertical"
-            android:layout_weight="1">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/categoryView"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="221dp">
 
-            <Button
-                android:id="@+id/addCtgBtn"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:background="@drawable/btn_bg"
-                android:text="+"
-                android:textSize="25sp"
-                android:textStyle="bold"
-                android:fontFamily="@font/poppins"
-                android:layout_gravity="end"
-                android:textAlignment="center"
-                tools:ignore="RtlCompat" />
-
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="@color/calculator_bg"
-            android:layout_gravity="bottom"
-            android:layout_weight="1">
-
-
-            <LinearLayout
-                android:id="@+id/textInputContainer"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <EditText
-                    android:id="@+id/inputMoney"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/enter_amount"
-                    android:textColorHint="@color/gray"
-                    android:fontFamily="@font/poppins"
-                    android:textSize="15sp"
-                    android:gravity="end"
-                    android:background="@drawable/input_bg"/>
+                    android:background="@drawable/primary_bg"
+                    android:elevation="15dp">
 
-                <EditText
-                    android:id="@+id/inputNote"
+
+                    <LinearLayout
+                        android:id="@+id/userImgContainer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:gravity="center"
+                        app:layout_constraintEnd_toEndOf="@id/constraintLayout"
+                        app:layout_constraintHorizontal_bias="0.09"
+                        app:layout_constraintStart_toStartOf="@id/constraintLayout"
+                        app:layout_constraintTop_toTopOf="@id/constraintLayout">
+
+                        <ImageView
+                            android:id="@+id/profileImg"
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            android:background="@drawable/user_circle"
+                            android:src="@drawable/profile"
+                            tools:layout_editor_absoluteX="20dp"
+                            tools:layout_editor_absoluteY="105dp" />
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/userDetailsContainer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:orientation="vertical"
+                        app:layout_constraintEnd_toEndOf="@id/constraintLayout"
+                        app:layout_constraintHorizontal_bias=".07"
+                        app:layout_constraintStart_toEndOf="@id/userImgContainer"
+                        app:layout_constraintTop_toTopOf="@id/constraintLayout">
+
+                        <TextView
+                            android:id="@+id/userName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins"
+                            android:text="David wall"
+                            android:textColor="@color/white"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+
+
+                        <TextView
+                            android:id="@+id/userEmail"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins"
+                            android:text="david@gmail.com"
+                            android:textColor="@color/white"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/notificationAlarm"
+                        android:layout_width="85dp"
+                        android:layout_height="85dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="4dp"
+                        android:src="@drawable/bell"
+                        app:layout_constraintEnd_toEndOf="@+id/constraintLayout"
+                        app:layout_constraintHorizontal_bias="1.0"
+                        app:layout_constraintStart_toEndOf="@+id/userDetailsContainer"
+                        app:layout_constraintTop_toTopOf="@+id/constraintLayout" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </RelativeLayout>
+
+
+
+            <!--    Upper Menus Container-->
+            <RelativeLayout
+                android:id="@+id/settingMenus"
+                android:layout_width="385dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/bg_1"
+                android:translationY="-99dp"
+                android:elevation="1dp">
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Note: "
-                    android:textColorHint="@color/gray"
-                    android:fontFamily="@font/poppins"
-                    android:textSize="15sp"
-                    android:gravity="start"
-                    android:background="@drawable/input_bg"
-                    android:layout_marginTop="15dp"/>
+                    android:orientation="vertical">
 
-            </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/ProfileContainer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
 
-            <GridLayout
-                android:id="@+id/calculatorGrid"
-                android:layout_width="match_parent"
+                        <ImageView
+                            android:id="@+id/ProfileIcon"
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            android:src="@drawable/registration"
+                            android:background="@drawable/user_circle"
+                            android:layout_gravity="center"/>
+
+                        <TextView
+                            android:layout_weight="1"
+                            android:id="@+id/ProfileText"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="Profile"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            android:fontFamily="@font/poppins"
+                            android:textColor="@color/black"
+                            android:layout_gravity="center"/>
+
+                        <ImageView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:src="@drawable/black_chevron_forward_24"
+                            android:layout_gravity="center"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/accountContainerr"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/accountIcon"
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            android:src="@drawable/registration"
+                            android:background="@drawable/user_circle"
+                            android:layout_gravity="center"/>
+
+                        <TextView
+                            android:layout_weight="1"
+                            android:id="@+id/accountText"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="Accounts"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            android:fontFamily="@font/poppins"
+                            android:textColor="@color/black"
+                            android:layout_gravity="center"/>
+
+                        <ImageView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:src="@drawable/black_chevron_forward_24"
+                            android:layout_gravity="center"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/categoryContainer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:id="@+id/categoryIcon"
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            android:src="@drawable/gridview"
+                            android:background="@drawable/user_circle"
+                            android:layout_gravity="center"/>
+
+                        <TextView
+                            android:id="@+id/categoryText"
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="Category Settings"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            android:fontFamily="@font/poppins"
+                            android:textColor="@color/black"
+                            android:layout_gravity="center"/>
+
+
+                        <ImageView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:src="@drawable/black_chevron_forward_24"
+                            android:layout_gravity="center"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/notificationContainer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:id="@+id/currencyIcon"
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            android:src="@drawable/note"
+                            android:background="@drawable/user_circle"
+                            android:layout_gravity="center"/>
+
+                        <TextView
+                            android:id="@+id/currencyChange"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="Currency Change"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            android:fontFamily="@font/poppins"
+                            android:textColor="@color/black"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"/>
+
+                        <ImageView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:src="@drawable/black_chevron_forward_24"
+                            android:layout_gravity="center"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:id="@+id/notificationIcon"
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            android:src="@drawable/bell"
+                            android:background="@drawable/user_circle"
+                            android:layout_gravity="center"/>
+
+                        <TextView
+                            android:id="@+id/notificationText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Notification"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            android:fontFamily="@font/poppins"
+                            android:textColor="@color/black"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"/>
+
+                        <ImageView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:src="@drawable/black_chevron_forward_24"
+                            android:layout_gravity="center"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/reminderContainer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:id="@+id/reminderIcon"
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            android:src="@drawable/alarm_clock"
+                            android:background="@drawable/user_circle"
+                            android:layout_gravity="center"/>
+
+                        <TextView
+                            android:id="@+id/remindersText"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="Reminders"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            android:fontFamily="@font/poppins"
+                            android:textColor="@color/black"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"/>
+
+                        <ImageView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:src="@drawable/black_chevron_forward_24"
+                            android:layout_gravity="center"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/budgetContainer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:id="@+id/budgetIcon"
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            android:src="@drawable/budget"
+                            android:background="@drawable/user_circle"
+                            android:layout_gravity="center"/>
+
+                        <TextView
+                            android:id="@+id/budgetText"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="Budget"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            android:fontFamily="@font/poppins"
+                            android:textColor="@color/black"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"/>
+
+                        <ImageView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:src="@drawable/black_chevron_forward_24"
+                            android:layout_gravity="center"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center"
+                        android:id="@+id/exportContainer">
+
+                        <ImageView
+                            android:id="@+id/exportIcon"
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            android:src="@drawable/export"
+                            android:background="@drawable/user_circle"
+                            android:layout_gravity="center"/>
+
+                        <TextView
+                            android:id="@+id/exportText"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="Export Data"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            android:fontFamily="@font/poppins"
+                            android:textColor="@color/black"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/PasswordContainer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:id="@+id/PasswordIcon"
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            android:src="@drawable/lock"
+                            android:background="@drawable/user_circle"
+                            android:layout_gravity="center"/>
+
+                        <TextView
+                            android:id="@+id/PasswordText"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="Change Password"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            android:fontFamily="@font/poppins"
+                            android:textColor="@color/black"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"/>
+
+                        <ImageView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:src="@drawable/black_chevron_forward_24"
+                            android:layout_gravity="center"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/calendarContainerr"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:id="@+id/calendarIcon"
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            android:src="@drawable/bluecal"
+                            android:background="@drawable/user_circle"
+                            android:layout_gravity="center"/>
+
+                        <TextView
+                            android:id="@+id/calendarText"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="Calendar"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            android:fontFamily="@font/poppins"
+                            android:textColor="@color/black"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"/>
+
+                        <ImageView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:src="@drawable/black_chevron_forward_24"
+                            android:layout_gravity="center"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/languageContainer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:id="@+id/languageIcon"
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            android:src="@drawable/language"
+                            android:background="@drawable/user_circle"
+                            android:layout_gravity="center"/>
+
+                        <TextView
+                            android:id="@+id/languageText"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="Language"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            android:fontFamily="@font/poppins"
+                            android:textColor="@color/black"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"/>
+
+                        <ImageView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:src="@drawable/black_chevron_forward_24"
+                            android:layout_gravity="center"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/themesContainerr"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:id="@+id/themeIcon"
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            android:src="@drawable/themes"
+                            android:background="@drawable/user_circle"
+                            android:layout_gravity="center"/>
+
+                        <TextView
+                            android:id="@+id/themeText"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="Theme"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            android:fontFamily="@font/poppins"
+                            android:textColor="@color/black"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"/>
+
+                        <ImageView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:src="@drawable/black_chevron_forward_24"
+                            android:layout_gravity="center"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/fontContainer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:id="@+id/fontIcon"
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            android:src="@drawable/fontsize"
+                            android:background="@drawable/user_circle"
+                            android:layout_gravity="center"/>
+
+                        <TextView
+                            android:id="@+id/fontText"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="Font Size"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            android:fontFamily="@font/poppins"
+                            android:textColor="@color/black"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"/>
+
+                        <ImageView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:src="@drawable/black_chevron_forward_24"
+                            android:layout_gravity="center"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/deleteContainer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:id="@+id/deleteIcon"
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            android:src="@drawable/trash"
+                            android:background="@drawable/user_circle"
+                            android:layout_gravity="center"/>
+
+                        <TextView
+                            android:id="@+id/deleteText"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="Delete All Data"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            android:fontFamily="@font/poppins"
+                            android:textColor="@color/black"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"/>
+
+                        <ImageView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:src="@drawable/black_chevron_forward_24"
+                            android:layout_gravity="center"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+            </RelativeLayout>
+
+            <!--    Bottom Menus Container-->
+            <RelativeLayout
+                android:id="@+id/bottomMenusContainer"
+                android:layout_width="385dp"
                 android:layout_height="wrap_content"
-                android:columnCount="4"
-                android:rowCount="4"
-                android:layout_marginTop="6dp">
+                android:background="@drawable/bg_1"
+                android:translationY="-85dp"
+                android:layout_gravity="center"
+                android:elevation="2dp">
 
 
-                <!--        row 1-->
-                <Button
-                    android:id="@+id/btn7"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="7"
-                    android:textSize="18sp"
-                    android:fontFamily="@font/poppins"
-                    android:textStyle="bold"
-                    android:gravity="center"
-                    style="@style/CalcButton"/>
-
-                <Button
-                    android:id="@+id/btn8"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="8"
-                    android:textSize="18sp"
-                    android:fontFamily="@font/poppins"
-                    android:textStyle="bold"
-                    android:gravity="center"
-                    style="@style/CalcButton"/>
-
-                <Button
-                    android:id="@+id/btn9"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="9"
-                    android:textSize="18sp"
-                    android:fontFamily="@font/poppins"
-                    android:textStyle="bold"
-                    android:gravity="center"
-                    style="@style/CalcButton"/>
+                    android:orientation="vertical">
 
 
-                <Button
-                    android:id="@+id/btnCalendar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/calendarBtn"
-                    android:textSize="14dp"
-                    android:fontFamily="@font/poppins"
-                    android:gravity="center"
-                    style="@style/CalcButton"/>
+                    <LinearLayout
+                        android:id="@+id/securityContainer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center">
 
-                <!--        row 2-->
-                <Button
-                    android:id="@+id/btn4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="4"
-                    android:textSize="18sp"
-                    android:fontFamily="@font/poppins"
-                    android:textStyle="bold"
-                    android:gravity="center"
-                    style="@style/CalcButton"/>
+                        <ImageView
+                            android:id="@+id/securityIcon"
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            android:src="@drawable/shield"
+                            android:background="@drawable/user_circle"
+                            android:layout_gravity="center"/>
 
-                <Button
-                    android:id="@+id/btn5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="5"
-                    android:textSize="18sp"
-                    android:fontFamily="@font/poppins"
-                    android:textStyle="bold"
-                    android:gravity="center"
-                    style="@style/CalcButton"/>
+                        <TextView
+                            android:id="@+id/securityText"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="Privacy &amp; Policy"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            android:fontFamily="@font/poppins"
+                            android:textColor="@color/black"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"/>
 
-                <Button
-                    android:id="@+id/btn6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="9"
-                    android:textSize="18sp"
-                    android:fontFamily="@font/poppins"
-                    android:textStyle="bold"
-                    android:gravity="center"
-                    style="@style/CalcButton"/>
+                        <ImageView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:src="@drawable/black_chevron_forward_24"
+                            android:layout_gravity="center"/>
 
-                <Button
-                    android:id="@+id/btnPlus"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="+"
-                    android:textSize="18sp"
-                    android:fontFamily="@font/poppins"
-                    android:textStyle="bold"
-                    android:gravity="center"
-                    style="@style/CalcButton"/>
+                    </LinearLayout>
 
-                <!--        row 3-->
+                    <LinearLayout
+                        android:id="@+id/termsContainer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center">
 
-                <Button
-                    android:id="@+id/btn1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="1"
-                    android:textSize="18sp"
-                    android:fontFamily="@font/poppins"
-                    android:textStyle="bold"
-                    android:gravity="center"
-                    style="@style/CalcButton"/>
+                        <ImageView
+                            android:id="@+id/termsIcon"
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            android:layout_gravity="center"
+                            android:background="@drawable/user_circle"
+                            android:src="@drawable/termsicon" />
 
-                <Button
-                    android:id="@+id/btn2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="2"
-                    android:textSize="18sp"
-                    android:fontFamily="@font/poppins"
-                    android:textStyle="bold"
-                    android:gravity="center"
-                    style="@style/CalcButton"/>
+                        <TextView
+                            android:id="@+id/termsText"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="Terms of Use"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            android:fontFamily="@font/poppins"
+                            android:textColor="@color/black"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"/>
 
-                <Button
-                    android:id="@+id/btn3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="3"
-                    android:textSize="18sp"
-                    android:fontFamily="@font/poppins"
-                    android:textStyle="bold"
-                    android:gravity="center"
-                    style="@style/CalcButton"/>
+                        <ImageView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:src="@drawable/black_chevron_forward_24"
+                            android:layout_gravity="center"/>
 
-                <Button
-                    android:id="@+id/btnMinus"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="-"
-                    android:textSize="18sp"
-                    android:fontFamily="@font/poppins"
-                    android:textStyle="bold"
-                    android:gravity="center"
-                    style="@style/CalcButton"/>
 
-                <!--        row 4-->
-                <Button
-                    android:id="@+id/btnDot"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="."
-                    android:textSize="18sp"
-                    android:fontFamily="@font/poppins"
-                    android:textStyle="bold"
-                    android:gravity="center"
-                    style="@style/CalcButton"/>
+                    </LinearLayout>
 
-                <Button
-                    android:id="@+id/btnZero"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="0"
-                    android:textSize="18sp"
-                    android:fontFamily="@font/poppins"
-                    android:textStyle="bold"
-                    android:gravity="center"
-                    style="@style/CalcButton"/>
+                    <LinearLayout
+                        android:id="@+id/aboutUsContainer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center">
 
-                <Button
-                    android:id="@+id/btnDelete"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/crossBtn"
-                    android:textSize="18sp"
-                    android:fontFamily="@font/poppins"
-                    android:textStyle="bold"
-                    android:gravity="center"
-                    style="@style/CalcButton"/>
+                        <ImageView
+                            android:id="@+id/aboutIcon"
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            android:src="@drawable/question"
+                            android:background="@drawable/user_circle"
+                            android:layout_gravity="center"/>
 
-                <Button
-                    android:id="@+id/btnSave"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/saveBtn"
-                    android:textSize="18sp"
-                    android:fontFamily="@font/poppins"
-                    android:textStyle="bold"
-                    android:gravity="center"
-                    style="@style/CalcButton"/>
+                        <TextView
+                            android:id="@+id/aboutText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="About Us"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            android:fontFamily="@font/poppins"
+                            android:textColor="@color/black"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"/>
 
-            </GridLayout>
+                        <ImageView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:src="@drawable/black_chevron_forward_24"
+                            android:layout_gravity="center"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/feedBackContainer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:id="@+id/feedBackIcon"
+                            android:layout_width="41dp"
+                            android:layout_height="45dp"
+                            android:layout_gravity="center"
+                            android:background="@drawable/user_circle"
+                            android:src="@drawable/comment" />
+
+                        <TextView
+                            android:id="@+id/feedBackText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="FeedBack"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            android:fontFamily="@font/poppins"
+                            android:textColor="@color/black"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"/>
+
+                        <ImageView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:src="@drawable/black_chevron_forward_24"
+                            android:layout_gravity="center"/>
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+            </RelativeLayout>
+
 
         </LinearLayout>
 
+    </androidx.core.widget.NestedScrollView>
 
-    </LinearLayout>
-
-
-</FrameLayout>
+</LinearLayout>

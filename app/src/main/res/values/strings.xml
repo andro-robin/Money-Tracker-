@@ -96,6 +96,14 @@
     <string name="calendarBtn">📅 Today</string>
     <string name="saveBtn">✓</string>
     <string name="transactions">Transactions: </string>
+    <string name="hey_dude_do_you_want_to_delete_your_money_tracking_all_data_then_hit_on_the_delete_button_amp_delete_all_data"><![CDATA[Hey Dude, Do you want to delete your money tracking all data?Then Hit On the delete button & delete all data.]]></string>
+    <string name="if_you_delete_all_data_you_can_t_able_to_download_and_find_your_pervious_data">If you delete all data. You can’t able to download and find your pervious data</string>
+    <string name="delete_all_data">Delete All Data</string>
+    <string name="add_category">Add Category</string>
+    <string name="what_is_lorem_ipsum">What is Lorem Ipsum?</string>
+    <string name="firstpprivacyttext"><![CDATA[Lorem Ipsum  is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s,]]></string>
+    <string name="remaining_balance">Remaining Balance</string>
+    <string name="total_balance">Total Balance</string>
 
 
 </resources>

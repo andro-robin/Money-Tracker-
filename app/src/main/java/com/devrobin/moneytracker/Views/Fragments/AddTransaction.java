@@ -190,6 +190,7 @@ public class AddTransaction extends BottomSheetDialogFragment {
         });
 
 
+
         //Select Account when adding account
         addBinding.account.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -200,11 +201,11 @@ public class AddTransaction extends BottomSheetDialogFragment {
                 accountAlertDialog.setView(listItemsBinding.getRoot());
 
                 ArrayList<AccountModel> accountList = new ArrayList<>();
-                accountList.add(new AccountModel(0, "Cash"));
-                accountList.add(new AccountModel(0, "Card"));
-                accountList.add(new AccountModel(0, "DBBL"));
-                accountList.add(new AccountModel(0, "Bkash"));
-                accountList.add(new AccountModel(0, "Bank"));
+                accountList.add(new AccountModel("Cash",0));
+                accountList.add(new AccountModel("Card",0));
+                accountList.add(new AccountModel("DBBL",0));
+                accountList.add(new AccountModel("Bkash",0));
+                accountList.add(new AccountModel("Bank",0));
 
                 AccountAdapter accountAdapter = new AccountAdapter(getContext(), accountList, new AccountAdapter.onAccountItemClickListener() {
                     @Override
