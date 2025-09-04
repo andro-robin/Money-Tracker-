@@ -69,11 +69,11 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
         CategoryModel transCategory = Constant.setCategoryDetails(transModel.getCategory());
 
         if (transCategory != null){
-            holder.itemsBinding.categoryIcons.setImageResource(transCategory.getCategoryImg());
+            holder.itemsBinding.categoryIcons.setImageResource(transCategory.getIconId());
             holder.itemsBinding.categoryIcons.setBackgroundTintList(context.getColorStateList(R.color.blue));
         }
         else {
-            holder.itemsBinding.categoryIcons.setImageResource(R.drawable.food);
+            holder.itemsBinding.categoryIcons.setImageResource(R.drawable.others);
             holder.itemsBinding.categoryIcons.setBackgroundTintList(context.getColorStateList(R.color.blue));
         }
 

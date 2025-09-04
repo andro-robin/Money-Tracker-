@@ -47,6 +47,7 @@ import java.util.Locale;
 import utils.Constant;
 import utils.DailySummer;
 import utils.MonthlySummary;
+import utils.SharedPrefsManager;
 
 public class HomeFragment extends Fragment {
 
@@ -77,6 +78,12 @@ public class HomeFragment extends Fragment {
     private Calendar calendar = Calendar.getInstance();
 
     private String selectedDate;
+    private SharedPrefsManager prefsManager;
+    private String defaultCurrency;
+
+
+
+
 
     public HomeFragment() {
         // Required empty public constructor
@@ -244,27 +251,64 @@ public class HomeFragment extends Fragment {
     @SuppressLint("DefaultLocale")
     private void updateMonthlySummary(MonthlySummary monthlySummary) {
 
-//       if (monthlySummary != null){
-
-//           double monthlyBalance = monthlySummary.getMonthlyIncome() - monthlySummary.getMonthlyExpense();
-
         homeBinding.monthlyIncomeAmount.setText(String.format("%.0f", monthlySummary.getMonthlyIncome()));
         homeBinding.monthlyExpenseAmount.setText(String.format("%.0f", monthlySummary.getMonthlyExpense()));
         homeBinding.monthlyBalanceAmount.setText(String.format("%.0f", monthlySummary.getMonthlyBalance()));
 
-//       }
 
     }
 
     @SuppressLint("DefaultLocale")
     private void updateDailySummery(DailySummer dailySummer) {
 
-        homeBinding.dailyIncomeAmount.setText(String.format("%.0f", dailySummer.getTotalIncome()));
-        homeBinding.dailyExpenseAmount.setText(String.format("%.0f", dailySummer.getTotalExpense()));
+        // Get current default currency
+        String currentDefaultCurrency = prefsManager.getDefaultCurrency();
 
+        // Convert amounts to default currency if needed
+        double dailyIncome = dailySummer.getTotalIncome();
+        double dailyExpense = dailySummer.getTotalExpense();
+
+        // Format amounts with currency symbol
+        String incomeText = formatAmountWithCurrency(dailyIncome, currentDefaultCurrency);
+        String expenseText = formatAmountWithCurrency(dailyExpense, currentDefaultCurrency);
+
+
+
+        homeBinding.dailyIncomeAmount.setText(String.format(incomeText));
+        homeBinding.dailyExpenseAmount.setText(String.format(expenseText));
 
         homeBinding.totalTransaction.setText(String.format("%d", dailySummer.getTransactionCount()));
 
+        //  homeBinding.dailyIncomeAmount.setText(String.format("%.0f", dailySummer.getTotalIncome()));
+        //    homeBinding.dailyExpenseAmount.setText(String.format("%.0f", dailySummer.getTotalExpense()));
+
+        // homeBinding.totalTransaction.setText(String.format("%d", dailySummer.getTransactionCount()));
+
+        // Update monthly balance display
+        updateMonthlyBalanceDisplay();
+    }
+
+
+    private void updateMonthlyBalanceDisplay() {
+        // Get current default currency
+        String currentDefaultCurrency = prefsManager.getDefaultCurrency();
+
+        // Get total balance from all accounts
+        transViewModel.getAccountViewModel().getTotalBalance().observe(getViewLifecycleOwner(), totalBalance -> {
+            if (totalBalance != null) {
+                // Convert total balance to default currency if needed
+                double convertedBalance = totalBalance; // This will be in the default currency
+
+                // Format and display
+                String balanceText = formatAmountWithCurrency(convertedBalance, currentDefaultCurrency);
+                homeBinding.monthlyBalanceAmount.setText(balanceText);
+            }
+        });
+
+        // For now, we'll use placeholder values for monthly income/expense
+        // You can implement proper monthly calculation methods in your ViewModel later
+        homeBinding.monthlyIncomeAmount.setText(formatAmountWithCurrency(0.0, currentDefaultCurrency));
+        homeBinding.monthlyExpenseAmount.setText(formatAmountWithCurrency(0.0, currentDefaultCurrency));
     }
 
     private void updateDateDisplay(Date date) {

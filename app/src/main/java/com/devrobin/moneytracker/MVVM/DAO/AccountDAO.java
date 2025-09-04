@@ -29,6 +29,9 @@ public interface AccountDAO {
     @Query("SELECT * FROM account_table WHERE accountId = :accountId")
     LiveData<AccountModel> getAccountById(int accountId);
 
+    @Query("SELECT * FROM account_table WHERE accountId = :accountId")
+    AccountModel getAccountByIdSync(int accountId);
+
     @Query("SELECT SUM(balance) FROM account_table")
     LiveData<Double> getTotalBalance();
 

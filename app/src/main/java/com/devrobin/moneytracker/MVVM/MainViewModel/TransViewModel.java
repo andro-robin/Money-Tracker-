@@ -23,6 +23,7 @@ import utils.MonthlySummary;
 public class TransViewModel extends AndroidViewModel {
 
     private TransRepository transRepository;
+    private AccountViewModel accountViewModel;
 
     private MutableLiveData<Date> selectedDate;
     private LiveData<List<TransactionModel>> transactionList;
@@ -35,6 +36,7 @@ public class TransViewModel extends AndroidViewModel {
 
 
         transRepository = new TransRepository(application);
+        accountViewModel = new AccountViewModel(application);
         selectedDate = new MutableLiveData<>();
 
         Calendar calendar = Calendar.getInstance();
@@ -163,5 +165,40 @@ public class TransViewModel extends AndroidViewModel {
     //Delete Transaction
     public void deleteOldTrans(TransactionModel transModel){
         transRepository.DeleteTrans(transModel);
+    }
+
+
+
+    // Update account balance based on transaction
+    private void updateAccountBalance(TransactionModel transaction) {
+        int accountId = transaction.getAccountId();
+        double amount = transaction.getAmount();
+
+        if ("INCOME".equals(transaction.getType())) {
+            // Add amount to account balance
+            accountViewModel.updateAccountBalance(accountId, amount);
+        } else if ("EXPENSE".equals(transaction.getType())) {
+            // Subtract amount from account balance
+            accountViewModel.updateAccountBalance(accountId, -amount);
+        }
+    }
+
+    // Reverse account balance change (for deletion)
+    private void reverseAccountBalance(TransactionModel transaction) {
+        int accountId = transaction.getAccountId();
+        double amount = transaction.getAmount();
+
+        if ("INCOME".equals(transaction.getType())) {
+            // Subtract amount from account balance
+            accountViewModel.updateAccountBalance(accountId, -amount);
+        } else if ("EXPENSE".equals(transaction.getType())) {
+            // Add amount to account balance
+            accountViewModel.updateAccountBalance(accountId, amount);
+        }
+    }
+
+    // Get AccountViewModel for account operations
+    public AccountViewModel getAccountViewModel() {
+        return accountViewModel;
     }
 }

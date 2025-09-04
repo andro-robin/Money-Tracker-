@@ -137,7 +137,7 @@ public class AddTransactionActivity extends AppCompatActivity {
 
 
                 String categoryName = category.getCategoryName();
-                int categoryImg = category.getCategoryImg();
+                //     int categoryImg = category.getCategoryImg();
 
 //                addTransaction(categoryName, categoryImg);
 

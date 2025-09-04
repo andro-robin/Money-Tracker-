@@ -11,8 +11,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.devrobin.moneytracker.Views.activity.AboutUs;
 import com.devrobin.moneytracker.Views.activity.AccountManagement;
-import com.devrobin.moneytracker.Views.activity.DeleteAllData;
+import com.devrobin.moneytracker.Views.activity.BudgetActivity;
+import com.devrobin.moneytracker.Views.activity.CategorySettingsActivity;
+import com.devrobin.moneytracker.Views.activity.DeleteAllDataActivity;
+import com.devrobin.moneytracker.Views.activity.NotificationSettingsActivity;
+import com.devrobin.moneytracker.Views.activity.PrivacyAndPolicy;
+import com.devrobin.moneytracker.Views.activity.ReminderActivity;
+import com.devrobin.moneytracker.Views.activity.TermsAndConditions;
+import com.devrobin.moneytracker.Views.activity.UsersFeedBack;
 import com.devrobin.moneytracker.databinding.FragmentUserProfileBinding;
 
 
@@ -59,12 +67,14 @@ public class UserProfile extends Fragment {
         profileBinding.categoryContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getContext(), "Click SuccessFull", Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(getContext(), CategorySettingsActivity.class);
+                startActivity(intent);
 
             }
         });
 
-        profileBinding.currencyChange.setOnClickListener(new View.OnClickListener() {
+        profileBinding.currencyContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getContext(), "Click SuccessFull", Toast.LENGTH_SHORT).show();
@@ -74,7 +84,9 @@ public class UserProfile extends Fragment {
         profileBinding.notificationContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getContext(), "Click SuccessFull", Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(getContext(), NotificationSettingsActivity.class);
+                startActivity(intent);
 
             }
         });
@@ -82,7 +94,8 @@ public class UserProfile extends Fragment {
         profileBinding.reminderContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getContext(), "Click SuccessFull", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getContext(), ReminderActivity.class);
+                startActivity(intent);
 
             }
         });
@@ -90,8 +103,9 @@ public class UserProfile extends Fragment {
         profileBinding.budgetContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getContext(), "Click SuccessFull", Toast.LENGTH_SHORT).show();
 
+                Intent intent = new Intent(getContext(), BudgetActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -140,7 +154,7 @@ public class UserProfile extends Fragment {
         profileBinding.deleteContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getContext(), DeleteAllData.class);
+                Intent intent = new Intent(getContext(), DeleteAllDataActivity.class);
                 startActivity(intent);
             }
         });
@@ -148,28 +162,34 @@ public class UserProfile extends Fragment {
         profileBinding.securityContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getContext(), "Click SuccessFull", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getContext(), PrivacyAndPolicy.class);
+                startActivity(intent);
             }
         });
 
         profileBinding.termsContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getContext(), "Click SuccessFull", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getContext(), TermsAndConditions.class);
+                startActivity(intent);
             }
         });
 
         profileBinding.aboutUsContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getContext(), "Click SuccessFull", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getContext(), AboutUs.class);
+                startActivity(intent);
             }
         });
 
         profileBinding.feedBackContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getContext(), "Click SuccessFull", Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(getContext(), UsersFeedBack.class);
+                startActivity(intent);
+
             }
         });
 

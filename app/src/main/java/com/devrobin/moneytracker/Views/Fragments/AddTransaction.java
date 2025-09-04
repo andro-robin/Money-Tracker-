@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -18,7 +19,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.devrobin.moneytracker.MVVM.MainViewModel.CategoryViewModel;
 import com.devrobin.moneytracker.MVVM.MainViewModel.TransViewModel;
 import com.devrobin.moneytracker.MVVM.Model.AccountModel;
 import com.devrobin.moneytracker.MVVM.Model.CategoryModel;
@@ -37,6 +40,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 import utils.Constant;
@@ -49,6 +53,8 @@ public class AddTransaction extends BottomSheetDialogFragment {
 
     private CategoryAdapter categoryAdapter;
     private TransactionModel transModel;
+    private CategoryViewModel categoryViewModel;
+    private TransViewModel transViewModel;
 
 
     //User Id
@@ -90,6 +96,8 @@ public class AddTransaction extends BottomSheetDialogFragment {
             }
         };
 
+        categoryViewModel = new ViewModelProvider(requireActivity()).get(CategoryViewModel.class);
+        transViewModel = new ViewModelProvider(requireActivity()).get(TransViewModel.class);
 
         selectedDate = ((MainActivity)getActivity()).transViewModel.getSelectedDate().getValue();
         if (selectedDate == null) {
@@ -164,26 +172,42 @@ public class AddTransaction extends BottomSheetDialogFragment {
             @Override
             public void onClick(View view) {
 
-                ListItemDialogBinding listItemDialog = ListItemDialogBinding.inflate(inflater);
-                AlertDialog categoryAlertDialog = new AlertDialog.Builder(getContext()).create();
-                categoryAlertDialog.setView(listItemDialog.getRoot());
-
-//                ArrayList<CategoryModel> categoryList = new ArrayList<>();
-
-
-                categoryAdapter = new CategoryAdapter(getContext(), Constant.categories, new CategoryAdapter.onItemClickListener() {
+                categoryViewModel.getAllCategories().observe(getViewLifecycleOwner(), new Observer<List<CategoryModel>>() {
                     @Override
-                    public void onItemClick(CategoryModel category) {
-                        addBinding.category.setText(category.getCategoryName());
-                        transModel.setCategory(category.getCategoryName());
-                        categoryAlertDialog.dismiss();
+                    public void onChanged(List<CategoryModel> categories) {
+
+                        if (categories != null &&  !categories.isEmpty()){
+
+                            ListItemDialogBinding listItemDialog = ListItemDialogBinding.inflate(inflater);
+                            AlertDialog categoryAlertDialog = new AlertDialog.Builder(getContext()).create();
+                            categoryAlertDialog.setView(listItemDialog.getRoot());
+
+                            ArrayList<CategoryModel> categoryList = new ArrayList<>(categories);
+
+
+                            categoryAdapter = new CategoryAdapter(getContext(), categoryList, new CategoryAdapter.onItemClickListener() {
+                                @Override
+                                public void onItemClick(CategoryModel category) {
+                                    addBinding.category.setText(category.getCategoryName());
+                                    transModel.setCategory(category.getCategoryName());
+                                    categoryAlertDialog.dismiss();
+
+                                }
+                            });
+
+                            listItemDialog.categoryItems.setLayoutManager(new GridLayoutManager(getContext(), 3));
+                            listItemDialog.categoryItems.setAdapter(categoryAdapter);
+
+                            categoryAlertDialog.show();
+
+                        }
+                        else {
+                            Toast.makeText(getContext(), "No categories available. Please add categories first.", Toast.LENGTH_SHORT).show();
+                        }
+
+
                     }
                 });
-
-                listItemDialog.categoryItems.setLayoutManager(new GridLayoutManager(getContext(), 3));
-                listItemDialog.categoryItems.setAdapter(categoryAdapter);
-
-                categoryAlertDialog.show();
 
 
             }

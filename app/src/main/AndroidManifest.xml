@@ -3,6 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+    <uses-permission android:name="android.permission.USE_EXACT_ALARM" />
 
     <application
         android:name="utils.User"
@@ -16,6 +19,33 @@
         android:theme="@style/Theme.MoneyTracker"
         tools:ignore="MissingClass">
         <activity
+            android:name=".Views.activity.CurrencySettingsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Views.activity.AddCategoryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Views.activity.CategorySettingsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Views.activity.CategorySettingsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Views.activity.NotificationSettingsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Views.activity.AddRemindersActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Views.activity.ReminderActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Views.activity.AddBudgetActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Views.activity.BudgetActivity"
+            android:exported="false" />
+        <activity
             android:name=".Views.activity.AddAndEditAccount"
             android:exported="false" />
         <activity
@@ -28,10 +58,7 @@
             android:name=".Views.activity.PrivacyAndPolicy"
             android:exported="false" />
         <activity
-            android:name=".Views.activity.CategorySettings"
-            android:exported="false" />
-        <activity
-            android:name=".Views.activity.DeleteAllData"
+            android:name=".Views.activity.DeleteAllDataActivity"
             android:exported="false" />
         <activity
             android:name=".Views.activity.AccountManagement"
@@ -59,7 +86,10 @@
             android:exported="false" />
         <activity
             android:name=".Views.activity.MainActivity"
-            android:exported="true" />
+            android:exported="true" /> <!-- Notification Receiver -->
+        <receiver
+            android:name=".utils.NotificationReceiver"
+            android:exported="false" />
     </application>
 
 </manifest>

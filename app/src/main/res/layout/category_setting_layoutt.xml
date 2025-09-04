@@ -35,7 +35,7 @@
         app:layout_constraintVertical_bias="0.478" />
 
     <ImageView
-        android:id="@+id/editIcons"
+        android:id="@+id/editBTN"
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:layout_marginStart="208dp"
@@ -45,12 +45,12 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/deleteCategory"
+        android:id="@+id/deleteBTN"
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:src="@drawable/trash"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/editIcons"
+        app:layout_constraintStart_toEndOf="@+id/editBTN"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 

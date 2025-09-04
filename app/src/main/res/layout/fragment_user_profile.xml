@@ -131,8 +131,8 @@
 
                         <ImageView
                             android:id="@+id/ProfileIcon"
-                            android:layout_width="45dp"
-                            android:layout_height="45dp"
+                            android:layout_width="29dp"
+                            android:layout_height="29dp"
                             android:src="@drawable/registration"
                             android:background="@drawable/user_circle"
                             android:layout_gravity="center"/>
@@ -143,15 +143,14 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:text="Profile"
-                            android:textSize="18sp"
-                            android:textStyle="bold"
+                            android:textSize="16sp"
                             android:fontFamily="@font/poppins"
                             android:textColor="@color/black"
                             android:layout_gravity="center"/>
 
                         <ImageView
-                            android:layout_width="35dp"
-                            android:layout_height="35dp"
+                            android:layout_width="27dp"
+                            android:layout_height="27dp"
                             android:src="@drawable/black_chevron_forward_24"
                             android:layout_gravity="center"/>
 
@@ -165,8 +164,8 @@
 
                         <ImageView
                             android:id="@+id/accountIcon"
-                            android:layout_width="45dp"
-                            android:layout_height="45dp"
+                            android:layout_width="29dp"
+                            android:layout_height="29dp"
                             android:src="@drawable/registration"
                             android:background="@drawable/user_circle"
                             android:layout_gravity="center"/>
@@ -177,15 +176,14 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:text="Accounts"
-                            android:textSize="18sp"
-                            android:textStyle="bold"
+                            android:textSize="16sp"
                             android:fontFamily="@font/poppins"
                             android:textColor="@color/black"
                             android:layout_gravity="center"/>
 
                         <ImageView
-                            android:layout_width="35dp"
-                            android:layout_height="35dp"
+                            android:layout_width="27dp"
+                            android:layout_height="27dp"
                             android:src="@drawable/black_chevron_forward_24"
                             android:layout_gravity="center"/>
 
@@ -200,8 +198,8 @@
 
                         <ImageView
                             android:id="@+id/categoryIcon"
-                            android:layout_width="45dp"
-                            android:layout_height="45dp"
+                            android:layout_width="29dp"
+                            android:layout_height="29dp"
                             android:src="@drawable/gridview"
                             android:background="@drawable/user_circle"
                             android:layout_gravity="center"/>
@@ -212,16 +210,49 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:text="Category Settings"
-                            android:textSize="18sp"
-                            android:textStyle="bold"
+                            android:textSize="16sp"
                             android:fontFamily="@font/poppins"
                             android:textColor="@color/black"
                             android:layout_gravity="center"/>
 
 
                         <ImageView
-                            android:layout_width="35dp"
-                            android:layout_height="35dp"
+                            android:layout_width="27dp"
+                            android:layout_height="27dp"
+                            android:src="@drawable/black_chevron_forward_24"
+                            android:layout_gravity="center"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/currencyContainer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:id="@+id/currencyIcon"
+                            android:layout_width="29dp"
+                            android:layout_height="29dp"
+                            android:src="@drawable/note"
+                            android:background="@drawable/user_circle"
+                            android:layout_gravity="center"/>
+
+                        <TextView
+                            android:id="@+id/currencyChange"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="Currency Change"
+                            android:textSize="16sp"
+                            android:fontFamily="@font/poppins"
+                            android:textColor="@color/black"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"/>
+
+                        <ImageView
+                            android:layout_width="27dp"
+                            android:layout_height="27dp"
                             android:src="@drawable/black_chevron_forward_24"
                             android:layout_gravity="center"/>
 
@@ -235,43 +266,9 @@
                         android:gravity="center">
 
                         <ImageView
-                            android:id="@+id/currencyIcon"
-                            android:layout_width="45dp"
-                            android:layout_height="45dp"
-                            android:src="@drawable/note"
-                            android:background="@drawable/user_circle"
-                            android:layout_gravity="center"/>
-
-                        <TextView
-                            android:id="@+id/currencyChange"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:text="Currency Change"
-                            android:textSize="18sp"
-                            android:textStyle="bold"
-                            android:fontFamily="@font/poppins"
-                            android:textColor="@color/black"
-                            android:layout_gravity="center"
-                            android:layout_weight="1"/>
-
-                        <ImageView
-                            android:layout_width="35dp"
-                            android:layout_height="35dp"
-                            android:src="@drawable/black_chevron_forward_24"
-                            android:layout_gravity="center"/>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center">
-
-                        <ImageView
                             android:id="@+id/notificationIcon"
-                            android:layout_width="45dp"
-                            android:layout_height="45dp"
+                            android:layout_width="29dp"
+                            android:layout_height="29dp"
                             android:src="@drawable/bell"
                             android:background="@drawable/user_circle"
                             android:layout_gravity="center"/>
@@ -281,16 +278,15 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Notification"
-                            android:textSize="18sp"
-                            android:textStyle="bold"
+                            android:textSize="16sp"
                             android:fontFamily="@font/poppins"
                             android:textColor="@color/black"
                             android:layout_gravity="center"
                             android:layout_weight="1"/>
 
                         <ImageView
-                            android:layout_width="35dp"
-                            android:layout_height="35dp"
+                            android:layout_width="27dp"
+                            android:layout_height="27dp"
                             android:src="@drawable/black_chevron_forward_24"
                             android:layout_gravity="center"/>
 
@@ -305,8 +301,8 @@
 
                         <ImageView
                             android:id="@+id/reminderIcon"
-                            android:layout_width="45dp"
-                            android:layout_height="45dp"
+                            android:layout_width="29dp"
+                            android:layout_height="29dp"
                             android:src="@drawable/alarm_clock"
                             android:background="@drawable/user_circle"
                             android:layout_gravity="center"/>
@@ -316,16 +312,15 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:text="Reminders"
-                            android:textSize="18sp"
-                            android:textStyle="bold"
+                            android:textSize="16sp"
                             android:fontFamily="@font/poppins"
                             android:textColor="@color/black"
                             android:layout_gravity="center"
                             android:layout_weight="1"/>
 
                         <ImageView
-                            android:layout_width="35dp"
-                            android:layout_height="35dp"
+                            android:layout_width="27dp"
+                            android:layout_height="27dp"
                             android:src="@drawable/black_chevron_forward_24"
                             android:layout_gravity="center"/>
 
@@ -340,8 +335,8 @@
 
                         <ImageView
                             android:id="@+id/budgetIcon"
-                            android:layout_width="45dp"
-                            android:layout_height="45dp"
+                            android:layout_width="29dp"
+                            android:layout_height="29dp"
                             android:src="@drawable/budget"
                             android:background="@drawable/user_circle"
                             android:layout_gravity="center"/>
@@ -351,19 +346,17 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:text="Budget"
-                            android:textSize="18sp"
-                            android:textStyle="bold"
+                            android:textSize="16sp"
                             android:fontFamily="@font/poppins"
                             android:textColor="@color/black"
                             android:layout_gravity="center"
                             android:layout_weight="1"/>
 
                         <ImageView
-                            android:layout_width="35dp"
-                            android:layout_height="35dp"
+                            android:layout_width="27dp"
+                            android:layout_height="27dp"
                             android:src="@drawable/black_chevron_forward_24"
                             android:layout_gravity="center"/>
-
                     </LinearLayout>
 
                     <LinearLayout
@@ -375,8 +368,8 @@
 
                         <ImageView
                             android:id="@+id/exportIcon"
-                            android:layout_width="45dp"
-                            android:layout_height="45dp"
+                            android:layout_width="29dp"
+                            android:layout_height="29dp"
                             android:src="@drawable/export"
                             android:background="@drawable/user_circle"
                             android:layout_gravity="center"/>
@@ -386,12 +379,17 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:text="Export Data"
-                            android:textSize="18sp"
-                            android:textStyle="bold"
+                            android:textSize="16sp"
                             android:fontFamily="@font/poppins"
                             android:textColor="@color/black"
                             android:layout_gravity="center"
                             android:layout_weight="1"/>
+
+                        <ImageView
+                            android:layout_width="27dp"
+                            android:layout_height="27dp"
+                            android:src="@drawable/black_chevron_forward_24"
+                            android:layout_gravity="center"/>
 
                     </LinearLayout>
 
@@ -404,8 +402,8 @@
 
                         <ImageView
                             android:id="@+id/PasswordIcon"
-                            android:layout_width="45dp"
-                            android:layout_height="45dp"
+                            android:layout_width="29dp"
+                            android:layout_height="29dp"
                             android:src="@drawable/lock"
                             android:background="@drawable/user_circle"
                             android:layout_gravity="center"/>
@@ -415,16 +413,15 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:text="Change Password"
-                            android:textSize="18sp"
-                            android:textStyle="bold"
+                            android:textSize="16sp"
                             android:fontFamily="@font/poppins"
                             android:textColor="@color/black"
                             android:layout_gravity="center"
                             android:layout_weight="1"/>
 
                         <ImageView
-                            android:layout_width="35dp"
-                            android:layout_height="35dp"
+                            android:layout_width="27dp"
+                            android:layout_height="27dp"
                             android:src="@drawable/black_chevron_forward_24"
                             android:layout_gravity="center"/>
 
@@ -439,8 +436,8 @@
 
                         <ImageView
                             android:id="@+id/calendarIcon"
-                            android:layout_width="45dp"
-                            android:layout_height="45dp"
+                            android:layout_width="29dp"
+                            android:layout_height="29dp"
                             android:src="@drawable/bluecal"
                             android:background="@drawable/user_circle"
                             android:layout_gravity="center"/>
@@ -450,16 +447,15 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:text="Calendar"
-                            android:textSize="18sp"
-                            android:textStyle="bold"
+                            android:textSize="16sp"
                             android:fontFamily="@font/poppins"
                             android:textColor="@color/black"
                             android:layout_gravity="center"
                             android:layout_weight="1"/>
 
                         <ImageView
-                            android:layout_width="35dp"
-                            android:layout_height="35dp"
+                            android:layout_width="27dp"
+                            android:layout_height="27dp"
                             android:src="@drawable/black_chevron_forward_24"
                             android:layout_gravity="center"/>
 
@@ -474,8 +470,8 @@
 
                         <ImageView
                             android:id="@+id/languageIcon"
-                            android:layout_width="45dp"
-                            android:layout_height="45dp"
+                            android:layout_width="29dp"
+                            android:layout_height="29dp"
                             android:src="@drawable/language"
                             android:background="@drawable/user_circle"
                             android:layout_gravity="center"/>
@@ -485,16 +481,15 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:text="Language"
-                            android:textSize="18sp"
-                            android:textStyle="bold"
+                            android:textSize="16sp"
                             android:fontFamily="@font/poppins"
                             android:textColor="@color/black"
                             android:layout_gravity="center"
                             android:layout_weight="1"/>
 
                         <ImageView
-                            android:layout_width="35dp"
-                            android:layout_height="35dp"
+                            android:layout_width="27dp"
+                            android:layout_height="27dp"
                             android:src="@drawable/black_chevron_forward_24"
                             android:layout_gravity="center"/>
 
@@ -509,8 +504,8 @@
 
                         <ImageView
                             android:id="@+id/themeIcon"
-                            android:layout_width="45dp"
-                            android:layout_height="45dp"
+                            android:layout_width="29dp"
+                            android:layout_height="29dp"
                             android:src="@drawable/themes"
                             android:background="@drawable/user_circle"
                             android:layout_gravity="center"/>
@@ -520,16 +515,15 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:text="Theme"
-                            android:textSize="18sp"
-                            android:textStyle="bold"
+                            android:textSize="16sp"
                             android:fontFamily="@font/poppins"
                             android:textColor="@color/black"
                             android:layout_gravity="center"
                             android:layout_weight="1"/>
 
                         <ImageView
-                            android:layout_width="35dp"
-                            android:layout_height="35dp"
+                            android:layout_width="27dp"
+                            android:layout_height="27dp"
                             android:src="@drawable/black_chevron_forward_24"
                             android:layout_gravity="center"/>
 
@@ -544,8 +538,8 @@
 
                         <ImageView
                             android:id="@+id/fontIcon"
-                            android:layout_width="45dp"
-                            android:layout_height="45dp"
+                            android:layout_width="29dp"
+                            android:layout_height="29dp"
                             android:src="@drawable/fontsize"
                             android:background="@drawable/user_circle"
                             android:layout_gravity="center"/>
@@ -555,16 +549,15 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:text="Font Size"
-                            android:textSize="18sp"
-                            android:textStyle="bold"
+                            android:textSize="16sp"
                             android:fontFamily="@font/poppins"
                             android:textColor="@color/black"
                             android:layout_gravity="center"
                             android:layout_weight="1"/>
 
                         <ImageView
-                            android:layout_width="35dp"
-                            android:layout_height="35dp"
+                            android:layout_width="27dp"
+                            android:layout_height="27dp"
                             android:src="@drawable/black_chevron_forward_24"
                             android:layout_gravity="center"/>
 
@@ -579,8 +572,8 @@
 
                         <ImageView
                             android:id="@+id/deleteIcon"
-                            android:layout_width="45dp"
-                            android:layout_height="45dp"
+                            android:layout_width="29dp"
+                            android:layout_height="29dp"
                             android:src="@drawable/trash"
                             android:background="@drawable/user_circle"
                             android:layout_gravity="center"/>
@@ -590,16 +583,15 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:text="Delete All Data"
-                            android:textSize="18sp"
-                            android:textStyle="bold"
+                            android:textSize="16sp"
                             android:fontFamily="@font/poppins"
                             android:textColor="@color/black"
                             android:layout_gravity="center"
                             android:layout_weight="1"/>
 
                         <ImageView
-                            android:layout_width="35dp"
-                            android:layout_height="35dp"
+                            android:layout_width="27dp"
+                            android:layout_height="27dp"
                             android:src="@drawable/black_chevron_forward_24"
                             android:layout_gravity="center"/>
 
@@ -636,8 +628,8 @@
 
                         <ImageView
                             android:id="@+id/securityIcon"
-                            android:layout_width="45dp"
-                            android:layout_height="45dp"
+                            android:layout_width="29dp"
+                            android:layout_height="29dp"
                             android:src="@drawable/shield"
                             android:background="@drawable/user_circle"
                             android:layout_gravity="center"/>
@@ -647,19 +639,17 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:text="Privacy &amp; Policy"
-                            android:textSize="18sp"
-                            android:textStyle="bold"
+                            android:textSize="16sp"
                             android:fontFamily="@font/poppins"
                             android:textColor="@color/black"
                             android:layout_gravity="center"
                             android:layout_weight="1"/>
 
                         <ImageView
-                            android:layout_width="35dp"
-                            android:layout_height="35dp"
+                            android:layout_width="27dp"
+                            android:layout_height="27dp"
                             android:src="@drawable/black_chevron_forward_24"
                             android:layout_gravity="center"/>
-
                     </LinearLayout>
 
                     <LinearLayout
@@ -671,8 +661,8 @@
 
                         <ImageView
                             android:id="@+id/termsIcon"
-                            android:layout_width="45dp"
-                            android:layout_height="45dp"
+                            android:layout_width="29dp"
+                            android:layout_height="29dp"
                             android:layout_gravity="center"
                             android:background="@drawable/user_circle"
                             android:src="@drawable/termsicon" />
@@ -682,16 +672,15 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:text="Terms of Use"
-                            android:textSize="18sp"
-                            android:textStyle="bold"
+                            android:textSize="16sp"
                             android:fontFamily="@font/poppins"
                             android:textColor="@color/black"
                             android:layout_gravity="center"
                             android:layout_weight="1"/>
 
                         <ImageView
-                            android:layout_width="35dp"
-                            android:layout_height="35dp"
+                            android:layout_width="27dp"
+                            android:layout_height="27dp"
                             android:src="@drawable/black_chevron_forward_24"
                             android:layout_gravity="center"/>
 
@@ -707,8 +696,8 @@
 
                         <ImageView
                             android:id="@+id/aboutIcon"
-                            android:layout_width="45dp"
-                            android:layout_height="45dp"
+                            android:layout_width="29dp"
+                            android:layout_height="29dp"
                             android:src="@drawable/question"
                             android:background="@drawable/user_circle"
                             android:layout_gravity="center"/>
@@ -718,16 +707,15 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="About Us"
-                            android:textSize="18sp"
-                            android:textStyle="bold"
+                            android:textSize="16sp"
                             android:fontFamily="@font/poppins"
                             android:textColor="@color/black"
                             android:layout_gravity="center"
                             android:layout_weight="1"/>
 
                         <ImageView
-                            android:layout_width="35dp"
-                            android:layout_height="35dp"
+                            android:layout_width="27dp"
+                            android:layout_height="27dp"
                             android:src="@drawable/black_chevron_forward_24"
                             android:layout_gravity="center"/>
 
@@ -742,8 +730,8 @@
 
                         <ImageView
                             android:id="@+id/feedBackIcon"
-                            android:layout_width="41dp"
-                            android:layout_height="45dp"
+                            android:layout_width="29dp"
+                            android:layout_height="29dp"
                             android:layout_gravity="center"
                             android:background="@drawable/user_circle"
                             android:src="@drawable/comment" />
@@ -753,19 +741,17 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="FeedBack"
-                            android:textSize="18sp"
-                            android:textStyle="bold"
+                            android:textSize="16sp"
                             android:fontFamily="@font/poppins"
                             android:textColor="@color/black"
                             android:layout_gravity="center"
                             android:layout_weight="1"/>
 
                         <ImageView
-                            android:layout_width="35dp"
-                            android:layout_height="35dp"
+                            android:layout_width="27dp"
+                            android:layout_height="27dp"
                             android:src="@drawable/black_chevron_forward_24"
                             android:layout_gravity="center"/>
-
                     </LinearLayout>
 
 

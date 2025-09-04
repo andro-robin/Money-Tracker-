@@ -32,12 +32,14 @@ public class TransactionModel {
     @ColumnInfo(name = "createDate")
     private Date createDate;
 
+    @ColumnInfo(name = "accountId")
+    private int accountId;
 
     public TransactionModel() {
     }
 
     //Constructor for use saving trans;
-    public TransactionModel(String type, String category, double amount, String note, Date transactionDate) {
+    public TransactionModel(String type, String category, double amount, String note, Date transactionDate, int accountId) {
 
         this.type = type;
         this.category = category;
@@ -46,11 +48,12 @@ public class TransactionModel {
         this.transactionDate = transactionDate;
         this.createDate = new Date();
         this.transId = 0;
+        this.accountId = accountId;
 
     }
 
     //Full Constructor
-    public TransactionModel(int transId, String type, String category, double amount, String note, Date transactionDate, Date createDate) {
+    public TransactionModel(int transId, String type, String category, double amount, String note, Date transactionDate, Date createDate, int accountId) {
         this.transId = transId;
         this.type = type;
         this.category = category;
@@ -58,6 +61,7 @@ public class TransactionModel {
         this.note = note;
         this.transactionDate = transactionDate;
         this.createDate = createDate;
+        this.accountId = 1;
     }
 
 
@@ -115,5 +119,13 @@ public class TransactionModel {
 
     public void setCreateDate(Date createDate) {
         this.createDate = createDate;
+    }
+
+    public int getAccountId() {
+        return accountId;
+    }
+
+    public void setAccountId(int accountId) {
+        this.accountId = accountId;
     }
 }

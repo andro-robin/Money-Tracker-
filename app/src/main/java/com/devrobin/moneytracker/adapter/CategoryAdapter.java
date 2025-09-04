@@ -43,8 +43,16 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         CategoryModel cgtoryModel = categoryList.get(position);
 
         holder.listItemsBinding.categoryName.setText(cgtoryModel.getCategoryName());
-        holder.listItemsBinding.categoryIcons.setImageResource(cgtoryModel.getCategoryImg());
 
+
+        // Handle icon ID safely with fallback
+        int iconId = cgtoryModel.getIconId();
+        try {
+            holder.listItemsBinding.categoryIcons.setImageResource(iconId);
+        } catch (Exception e) {
+            // Fallback to default food icon if icon ID is invalid
+            holder.listItemsBinding.categoryIcons.setImageResource(R.drawable.others);
+        }
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,15 +111,4 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         notifyDataSetChanged();
     }
 
-    @Override
-    public int getItemViewType(int position) {
-
-        if (position % 2 == 0){
-            return 0;
-        }
-        else {
-            return 1;
-        }
-
-    }
 }

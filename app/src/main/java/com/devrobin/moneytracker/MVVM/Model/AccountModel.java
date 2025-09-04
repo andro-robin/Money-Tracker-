@@ -120,17 +120,6 @@ public class AccountModel {
     }
 
     public String getCurrencySymbol() {
-        switch (currency) {
-            case "BDT":
-                return "৳";
-            case "USD":
-                return "$";
-            case "EUR":
-                return "€";
-            case "GBP":
-                return "£";
-            default:
-                return currency;
-        }
+
     }
 }
