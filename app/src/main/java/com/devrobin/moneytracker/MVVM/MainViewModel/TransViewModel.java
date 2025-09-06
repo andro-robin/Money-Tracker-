@@ -100,9 +100,19 @@ public class TransViewModel extends AndroidViewModel {
         return dailySummary;
     }
 
+    //get Daily Summary with Currency Conversion
+    public LiveData<DailySummer> getDailySummerWithConversion(String defaultCurrency){
+        return transRepository.getDailySummerWithConversion(selectedDate.getValue(), defaultCurrency);
+    }
+
     //Get Monthly Summary
     public LiveData<MonthlySummary> getMonthlySummary(){
         return monthlySummary;
+    }
+
+    //Get Monthly Summary with Currency Conversion
+    public LiveData<MonthlySummary> getMonthlySummaryWithConversion(String defaultCurrency){
+        return transRepository.getMonthlySummaryWithConversion(selectedDate.getValue(), defaultCurrency);
     }
 
     //Get Current Selected Date
@@ -155,16 +165,24 @@ public class TransViewModel extends AndroidViewModel {
     public void addNewTrans(TransactionModel transModel){
         transModel.setTransactionDate(selectedDate.getValue());
         transRepository.InsertTrans(transModel);
+
+        // Update account balance
+        updateAccountBalance(transModel);
     }
 
     //update Transaction
     public void updateOldTrans(TransactionModel transModel){
         transRepository.UpdateTrans(transModel);
+
+        // Update account balance
+        updateAccountBalance(transModel);
     }
 
     //Delete Transaction
     public void deleteOldTrans(TransactionModel transModel){
         transRepository.DeleteTrans(transModel);
+
+        reverseAccountBalance(transModel);
     }
 
 

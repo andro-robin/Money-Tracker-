@@ -16,6 +16,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.devrobin.moneytracker.MVVM.MainViewModel.AccountViewModel;
+import com.devrobin.moneytracker.MVVM.MainViewModel.CurrencyViewModel;
 import com.devrobin.moneytracker.MVVM.Model.AccountModel;
 import com.devrobin.moneytracker.R;
 import com.devrobin.moneytracker.databinding.ActivityAddAndEditAccountBinding;
@@ -23,12 +24,15 @@ import com.devrobin.moneytracker.databinding.ActivityAddAndEditAccountBinding;
 import java.util.ArrayList;
 import java.util.List;
 
+import utils.CurrencyConverter;
+
 public class AddAndEditAccount extends AppCompatActivity {
 
     private ActivityAddAndEditAccountBinding editAccountBinding;
     private AccountViewModel accountViewModel;
     private AccountModel currentAccount;
     private boolean isEditMode = false;
+    private CurrencyViewModel currencyViewModel;
 
 
     private String selectedType = "";
@@ -51,6 +55,10 @@ public class AddAndEditAccount extends AppCompatActivity {
 
         // Initialize ViewModel
         accountViewModel = new ViewModelProvider(this).get(AccountViewModel.class);
+        currencyViewModel = new ViewModelProvider(this).get(CurrencyViewModel.class);
+
+        // Initialize CurrencyConverter
+        CurrencyConverter.init(this);
 
         // Check if existing account
         int accountId = getIntent().getIntExtra("account_id", -1);
@@ -76,6 +84,8 @@ public class AddAndEditAccount extends AppCompatActivity {
         accountType.add("Savings Account");
         accountType.add("Investment Account");
 
+        // Currencies - will be populated dynamically from CurrencyViewModel
+        loadCurrenciesFromAPI();
 
         // Account types
         currencies.add("BDT (৳) Bangladeshi Taka");
@@ -109,11 +119,11 @@ public class AddAndEditAccount extends AppCompatActivity {
 
         // Set title based on mode
         if (isEditMode){
-            editAccountBinding.tvTitle.setText("Edit");
+            editAccountBinding.tvTitle.setText(R.string.edit);
             editAccountBinding.btnDelete.setVisibility(View.VISIBLE);
         }
         else {
-            editAccountBinding.tvTitle.setText("Add Account");
+            editAccountBinding.tvTitle.setText(R.string.add_account);
             editAccountBinding.btnDelete.setVisibility(View.GONE);
         }
 
@@ -161,6 +171,22 @@ public class AddAndEditAccount extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void loadCurrenciesFromAPI() {
+        currencies.clear();
+
+        // Get supported currencies from CurrencyViewModel
+        String[] supportedCurrencies = currencyViewModel.getSupportedCurrencies();
+
+        for (String currencyCode : supportedCurrencies) {
+            String displayName = currencyViewModel.getCurrencyDisplayName(currencyCode);
+            String symbol = currencyViewModel.getCurrencySymbol(currencyCode);
+            currencies.add(currencyCode + " (" + symbol + ") " + displayName);
+        }
+
+        // Fetch latest exchange rates
+        currencyViewModel.fetchLatestRates();
     }
 
 

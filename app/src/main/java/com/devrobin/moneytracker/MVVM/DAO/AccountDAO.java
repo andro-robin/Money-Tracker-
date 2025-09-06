@@ -26,6 +26,9 @@ public interface AccountDAO {
     @Query("SELECT * FROM account_table ORDER BY accountName ASC")
     LiveData<List<AccountModel>> getAllAccounts();
 
+    @Query("SELECT * FROM account_table ORDER BY accountName ASC")
+    List<AccountModel> getAllAccountsSync();
+
     @Query("SELECT * FROM account_table WHERE accountId = :accountId")
     LiveData<AccountModel> getAccountById(int accountId);
 

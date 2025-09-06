@@ -1,6 +1,7 @@
 package com.devrobin.moneytracker.Views.Fragments;
 
 import android.content.Intent;
+import android.content.pm.CrossProfileApps;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -15,7 +16,12 @@ import com.devrobin.moneytracker.Views.activity.AboutUs;
 import com.devrobin.moneytracker.Views.activity.AccountManagement;
 import com.devrobin.moneytracker.Views.activity.BudgetActivity;
 import com.devrobin.moneytracker.Views.activity.CategorySettingsActivity;
+import com.devrobin.moneytracker.Views.activity.ChangePasswordActivity;
+import com.devrobin.moneytracker.Views.activity.CurrencySettingsActivity;
 import com.devrobin.moneytracker.Views.activity.DeleteAllDataActivity;
+import com.devrobin.moneytracker.Views.activity.ExportSettingsActivity;
+import com.devrobin.moneytracker.Views.activity.FontSizeActivity;
+import com.devrobin.moneytracker.Views.activity.LanguageSettingsActivity;
 import com.devrobin.moneytracker.Views.activity.NotificationSettingsActivity;
 import com.devrobin.moneytracker.Views.activity.PrivacyAndPolicy;
 import com.devrobin.moneytracker.Views.activity.ReminderActivity;
@@ -50,7 +56,8 @@ public class UserProfile extends Fragment {
         profileBinding.ProfileContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getContext(), "Click SuccessFull", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getContext(), ProfileSettingsActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -77,7 +84,8 @@ public class UserProfile extends Fragment {
         profileBinding.currencyContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getContext(), "Click SuccessFull", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getContext(), CurrencySettingsActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -112,28 +120,29 @@ public class UserProfile extends Fragment {
         profileBinding.exportContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getContext(), "Click SuccessFull", Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(getContext(), ExportSettingsActivity.class);
+                startActivity(intent);
+
             }
         });
 
         profileBinding.PasswordContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getContext(), "Click SuccessFull", Toast.LENGTH_SHORT).show();
-            }
-        });
 
-        profileBinding.calendarContainerr.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getContext(), "Click SuccessFull", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getContext(), ChangePasswordActivity.class);
+                startActivity(intent);
+
             }
         });
 
         profileBinding.languageContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getContext(), "Click SuccessFull", Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(getContext(), LanguageSettingsActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -147,7 +156,10 @@ public class UserProfile extends Fragment {
         profileBinding.fontContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getContext(), "Click SuccessFull", Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(getContext(), FontSizeActivity.class);
+                startActivity(intent);
+
             }
         });
 

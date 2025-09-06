@@ -26,6 +26,9 @@ public interface BudgetDAO {
     @Query("SELECT * FROM budget_table ORDER BY year DESC, month DESC, day DESC")
     LiveData<List<BudgetModel>> getAllBudgets();
 
+    @Query("SELECT * FROM budget_table ORDER BY year DESC, month DESC, day DESC")
+    List<BudgetModel> getAllBudgetsSync();
+
     @Query("SELECT * FROM budget_table WHERE budgetId = :budgetId")
     LiveData<BudgetModel> getBudgetById(int budgetId);
 

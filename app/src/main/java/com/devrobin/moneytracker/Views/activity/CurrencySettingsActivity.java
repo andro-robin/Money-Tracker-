@@ -66,12 +66,7 @@ public class CurrencySettingsActivity extends AppCompatActivity implements Curre
         // Ensure CurrencyConverter is initialized before creating adapter
         utils.CurrencyConverter.init(this);
 
-        currencyAdapter = new CurrencyAdapter(currencyViewModel, new CurrencyAdapter.OnCurrencySelectedListener() {
-            @Override
-            public void onCurrencySelected(String currency) {
-
-            }
-        });
+        currencyAdapter = new CurrencyAdapter(currencyViewModel, this);
         currencyBinding.rvCurrencies.setLayoutManager(new LinearLayoutManager(this));
         currencyBinding.rvCurrencies.setAdapter(currencyAdapter);
 

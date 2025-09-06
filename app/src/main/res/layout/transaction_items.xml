@@ -58,22 +58,45 @@
                 android:layout_marginLeft="10dp"/>
 
 
-            <TextView
-                android:id="@+id/categoryAmount"
-                android:layout_width="match_parent"
+
+            <!-- Transaction Amount and Currency -->
+            <LinearLayout
+                android:id="@+id/amountContainer"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins"
-                android:text="200"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                android:textStyle="bold"
+                android:orientation="vertical"
                 android:gravity="end"
+                android:layout_weight="1"
+                android:layout_marginEnd="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.881"
-                app:layout_constraintStart_toEndOf="@+id/categoryContent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.509" />
+                app:layout_constraintTop_toTopOf="parent">
+
+                <!-- Transaction Amount -->
+                <TextView
+                    android:id="@+id/categoryAmount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins"
+                    android:text="@string/_200"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:gravity="end" />
+
+                <!-- Currency and Balance Info (for multi-currency transactions) -->
+                <TextView
+                    android:id="@+id/currencyInfo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins"
+                    android:text=""
+                    android:textColor="@color/text_secondary"
+                    android:textSize="14sp"
+                    android:gravity="end"
+                    android:visibility="gone" />
+
+            </LinearLayout>
 
         </LinearLayout>
 

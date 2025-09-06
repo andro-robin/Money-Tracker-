@@ -8,6 +8,7 @@ import java.util.Map;
 
 public class CurrencyConverter {
 
+
     private static final String TAG = "CurrencyConverter";
 
     // Fallback exchange rates relative to USD (as base currency)
@@ -40,12 +41,11 @@ public class CurrencyConverter {
      * @param context Application context
      */
     public static void init(Context context) {
-
         if (prefsManager == null) {
             prefsManager = SharedPrefsManager.getInstance(context);
-            defaultCurrency = prefsManager.getDefaultCurrency();
         }
-
+        // Always reload the default currency from SharedPreferences
+        defaultCurrency = prefsManager.getDefaultCurrency();
     }
 
     /**
@@ -53,15 +53,20 @@ public class CurrencyConverter {
      * @param currency Currency code
      */
     public static void setDefaultCurrency(String currency) {
+        Log.d(TAG, "Setting default currency from '" + defaultCurrency + "' to '" + currency + "'");
 
         if (isCurrencySupported(currency)) {
             defaultCurrency = currency;
             // Save to SharedPreferences if initialized
             if (prefsManager != null) {
                 prefsManager.saveDefaultCurrency(currency);
+                Log.d(TAG, "Default currency saved to SharedPreferences: " + currency);
+            } else {
+                Log.w(TAG, "SharedPrefsManager not initialized, cannot save currency");
             }
+        } else {
+            Log.w(TAG, "Currency not supported: " + currency);
         }
-
     }
 
     /**
@@ -69,6 +74,7 @@ public class CurrencyConverter {
      * @return Default currency code
      */
     public static String getDefaultCurrency() {
+        Log.d(TAG, "Getting default currency: " + defaultCurrency);
         return defaultCurrency;
     }
 

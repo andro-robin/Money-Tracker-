@@ -61,7 +61,31 @@ public class TransactionModel {
         this.note = note;
         this.transactionDate = transactionDate;
         this.createDate = createDate;
-        this.accountId = 1;
+        this.accountId = accountId;
+    }
+
+    // Legacy constructor for backward compatibility
+    public TransactionModel(String type, String category, double amount, String note, Date transactionDate) {
+        this.type = type;
+        this.category = category;
+        this.amount = amount;
+        this.note = note;
+        this.transactionDate = transactionDate;
+        this.createDate = new Date();
+        this.transId = 0;
+        this.accountId = 1; // Default to first account
+    }
+
+    // Legacy full constructor for backward compatibility
+    public TransactionModel(int transId, String type, String category, double amount, String note, Date transactionDate, Date createDate) {
+        this.transId = transId;
+        this.type = type;
+        this.category = category;
+        this.amount = amount;
+        this.note = note;
+        this.transactionDate = transactionDate;
+        this.createDate = createDate;
+        this.accountId = 1; // Default to first account
     }
 
 

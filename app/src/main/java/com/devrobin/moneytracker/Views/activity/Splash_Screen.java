@@ -9,6 +9,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.devrobin.moneytracker.R;
 
+import utils.LocaleManager;
+
 public class Splash_Screen extends AppCompatActivity {
 
     @Override
@@ -16,6 +18,8 @@ public class Splash_Screen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_splash_screen);
+
+        LocaleManager.initializeLocale(this);
 
         new Handler().postDelayed(new Runnable() {
             @Override

@@ -56,6 +56,11 @@ public class AddTransaction extends BottomSheetDialogFragment {
     private CategoryViewModel categoryViewModel;
     private TransViewModel transViewModel;
 
+    private Date selectedDate;
+    private AccountModel selectedAccount;
+    private ArrayList<AccountModel> accountList = new ArrayList<>();
+    private ArrayList<CategoryModel> categoryList = new ArrayList<>();
+
 
     //User Id
     private String currentUserName;
@@ -66,7 +71,7 @@ public class AddTransaction extends BottomSheetDialogFragment {
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener authStateListener;
 
-    private Date selectedDate;
+
 //
 
     public AddTransaction() {
@@ -87,10 +92,10 @@ public class AddTransaction extends BottomSheetDialogFragment {
                 firebaseUser = firebaseAuth.getCurrentUser();
 
                 if (firebaseUser != null){
-
+                    // User is signed in
                 }
                 else {
-
+                    // User is signed out
                 }
 
             }
@@ -99,7 +104,8 @@ public class AddTransaction extends BottomSheetDialogFragment {
         categoryViewModel = new ViewModelProvider(requireActivity()).get(CategoryViewModel.class);
         transViewModel = new ViewModelProvider(requireActivity()).get(TransViewModel.class);
 
-        selectedDate = ((MainActivity)getActivity()).transViewModel.getSelectedDate().getValue();
+        // Get selected date from ViewModel
+        selectedDate = transViewModel.getSelectedDate().getValue();
         if (selectedDate == null) {
             selectedDate = new Date(); // fallback to current date
         }
@@ -108,6 +114,13 @@ public class AddTransaction extends BottomSheetDialogFragment {
 //        Income & Expense Btn
 
         transModel = new TransactionModel();
+
+        // Set a safe default type and reflect button UI
+        transModel.setType(Constant.EXPENSE);
+        addBinding.expenseBtn.setBackground(getContext().getDrawable(R.drawable.btnselector_bg));
+        addBinding.expenseBtn.setTextColor(getContext().getColor(R.color.white));
+        addBinding.incomeBtn.setBackground(getContext().getDrawable(R.drawable.defaultbtn_bg));
+        addBinding.incomeBtn.setTextColor(getContext().getColor(R.color.black));
 
         addBinding.expenseBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -172,6 +185,7 @@ public class AddTransaction extends BottomSheetDialogFragment {
             @Override
             public void onClick(View view) {
 
+                // Get categories from database
                 categoryViewModel.getAllCategories().observe(getViewLifecycleOwner(), new Observer<List<CategoryModel>>() {
                     @Override
                     public void onChanged(List<CategoryModel> categories) {
@@ -181,9 +195,6 @@ public class AddTransaction extends BottomSheetDialogFragment {
                             ListItemDialogBinding listItemDialog = ListItemDialogBinding.inflate(inflater);
                             AlertDialog categoryAlertDialog = new AlertDialog.Builder(getContext()).create();
                             categoryAlertDialog.setView(listItemDialog.getRoot());
-
-                            ArrayList<CategoryModel> categoryList = new ArrayList<>(categories);
-
 
                             categoryAdapter = new CategoryAdapter(getContext(), categoryList, new CategoryAdapter.onItemClickListener() {
                                 @Override
@@ -214,41 +225,43 @@ public class AddTransaction extends BottomSheetDialogFragment {
         });
 
 
+        // Setup account spinner
+        setupAccountSpinner();
 
         //Select Account when adding account
-        addBinding.account.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        //addBinding.account.setOnClickListener(new View.OnClickListener() {
+        //       @Override
+                    //   public void onClick(View view) {
 
-                ListItemDialogBinding listItemsBinding = ListItemDialogBinding.inflate(inflater);
-                AlertDialog accountAlertDialog = new AlertDialog.Builder(getContext()).create();
-                accountAlertDialog.setView(listItemsBinding.getRoot());
+            //    ListItemDialogBinding listItemsBinding = ListItemDialogBinding.inflate(inflater);
+            //     AlertDialog accountAlertDialog = new AlertDialog.Builder(getContext()).create();
+            //     accountAlertDialog.setView(listItemsBinding.getRoot());
 
-                ArrayList<AccountModel> accountList = new ArrayList<>();
-                accountList.add(new AccountModel("Cash",0));
-                accountList.add(new AccountModel("Card",0));
-                accountList.add(new AccountModel("DBBL",0));
-                accountList.add(new AccountModel("Bkash",0));
-                accountList.add(new AccountModel("Bank",0));
+            //    ArrayList<AccountModel> accountList = new ArrayList<>();
+            //    accountList.add(new AccountModel("Cash",0));
+            //    accountList.add(new AccountModel("Card",0));
+            //    accountList.add(new AccountModel("DBBL",0));
+            //     accountList.add(new AccountModel("Bkash",0));
+            //   accountList.add(new AccountModel("Bank",0));
 
-                AccountAdapter accountAdapter = new AccountAdapter(getContext(), accountList, new AccountAdapter.onAccountItemClickListener() {
-                    @Override
-                    public void accountItemClick(AccountModel accountModel) {
+            //    AccountAdapter accountAdapter = new AccountAdapter(getContext(), accountList, new AccountAdapter.onAccountItemClickListener() {
+                    //   @Override
+                            //   public void accountItemClick(AccountModel accountModel) {
 
-                        addBinding.account.setText(accountModel.getAccountName());
-                        accountAlertDialog.dismiss();
+                        //   addBinding.account.setText(accountModel.getAccountName());
+                        //   accountAlertDialog.dismiss();
 
-                    }
-                });
+                        //    }
+                    // });
 
-                listItemsBinding.categoryItems.setLayoutManager(new LinearLayoutManager(getContext()));
-                listItemsBinding.categoryItems.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
-                listItemsBinding.categoryItems.setHasFixedSize(true);
-                listItemsBinding.categoryItems.setAdapter(accountAdapter);
+            //  listItemsBinding.categoryItems.setLayoutManager(new LinearLayoutManager(getContext()));
+            // listItemsBinding.categoryItems.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
+            //    listItemsBinding.categoryItems.setHasFixedSize(true);
+            //  listItemsBinding.categoryItems.setAdapter(accountAdapter);
 
-                accountAlertDialog.show();
-            }
-        });
+            //    accountAlertDialog.show();
+            //   }
+        // });
 
         addBinding.saveTransactionBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -258,6 +271,8 @@ public class AddTransaction extends BottomSheetDialogFragment {
                 String date = addBinding.date.toString();
                 String note = addBinding.note.getText().toString().trim();
                 String category = addBinding.category.getText().toString();
+                String accountName = addBinding.account.getText().toString();
+
 
                 //Validation inputs
                 if (amountStr.isEmpty()){
@@ -299,11 +314,20 @@ public class AddTransaction extends BottomSheetDialogFragment {
                 selectedDate.set(Calendar.SECOND, currentDate.get(Calendar.SECOND));
                 selectedDate.set(Calendar.MILLISECOND, currentDate.get(Calendar.MILLISECOND));
 
-                //Create Transaction
-                TransactionModel transactionModel = new TransactionModel(type, category, amount, note, selectedDate.getTime());
+                int accountId = 1; // Default to first account
+                if (selectedAccount != null) {
+                    accountId = selectedAccount.getAccountId();
+                }
 
-                ((MainActivity)getActivity()).transViewModel.addNewTrans(transactionModel);
-                ((MainActivity)getActivity()).transViewModel.getTransactionList();
+                //Create Transaction
+                TransactionModel transactionModel = new TransactionModel(type, category, amount, note, selectedDate.getTime(), accountId);
+
+                // Use the local transViewModel instead of casting to MainActivity
+                // ((MainActivity)getActivity()).transViewModel.addNewTrans(transactionModel);
+                // ((MainActivity)getActivity()).transViewModel.getTransactionList()
+
+                transViewModel.addNewTrans(transactionModel);
+                transViewModel.getTransactionList();
                 dismiss();
             }
         });
@@ -315,4 +339,50 @@ public class AddTransaction extends BottomSheetDialogFragment {
     public void setSelectedDate(Date selectedDate){
         this.selectedDate = selectedDate;
     }
+
+
+
+    private void setupAccountSpinner() {
+        // Get accounts from ViewModel
+        transViewModel.getAccountViewModel().getAllAccounts().observe(getViewLifecycleOwner(), accounts -> {
+            if (accounts != null && !accounts.isEmpty()) {
+                accountList.clear();
+                accountList.addAll(accounts);
+            }
+        });
+
+        addBinding.account.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showAccountSelectionDialog();
+            }
+        });
+
+    }
+
+    private void showAccountSelectionDialog() {
+        if (accountList.isEmpty()) {
+            Toast.makeText(getContext(), "No accounts available", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        String[] accountNames = new String[accountList.size()];
+        for (int i = 0; i < accountList.size(); i++) {
+            AccountModel account = accountList.get(i);
+            accountNames[i] = String.format("%s (%s %.0f)",
+                    account.getAccountName(),
+                    account.getCurrencySymbol(),
+                    account.getBalance());
+        }
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("Select Account");
+        builder.setItems(accountNames, (dialog, which) -> {
+            selectedAccount = accountList.get(which);
+            addBinding.account.setText(accountNames[which]);
+        });
+        builder.show();
+    }
+
 }
+

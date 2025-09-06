@@ -19,59 +19,93 @@
         android:theme="@style/Theme.MoneyTracker"
         tools:ignore="MissingClass">
         <activity
-            android:name=".Views.activity.CurrencySettingsActivity"
+            android:name=".Views.activity.ProfileSettingsActivity"
             android:exported="false" />
+        <activity
+            android:name=".Views.activity.FontSizeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Views.activity.ChangePasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Views.activity.ExportSettingsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Views.activity.LanguageSettingsActivity"
+            android:exported="false"
+            android:theme="@style/Theme.MoneyTracker" />
+        <activity
+            android:name=".Views.activity.CurrencySettingsActivity"
+            android:exported="false"
+            android:theme="@style/Theme.MoneyTracker" />
         <activity
             android:name=".Views.activity.AddCategoryActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.MoneyTracker" />
         <activity
             android:name=".Views.activity.CategorySettingsActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.MoneyTracker" />
         <activity
             android:name=".Views.activity.CategorySettingsActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.MoneyTracker" />
         <activity
             android:name=".Views.activity.NotificationSettingsActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.MoneyTracker" />
         <activity
             android:name=".Views.activity.AddRemindersActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.MoneyTracker" />
         <activity
             android:name=".Views.activity.ReminderActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.MoneyTracker" />
         <activity
             android:name=".Views.activity.AddBudgetActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.MoneyTracker" />
         <activity
             android:name=".Views.activity.BudgetActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.MoneyTracker" />
         <activity
             android:name=".Views.activity.AddAndEditAccount"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.MoneyTracker" />
         <activity
             android:name=".Views.activity.UsersFeedBack"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.MoneyTracker" />
         <activity
             android:name=".Views.activity.TermsAndConditions"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.MoneyTracker" />
         <activity
             android:name=".Views.activity.PrivacyAndPolicy"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.MoneyTracker" />
         <activity
             android:name=".Views.activity.DeleteAllDataActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.MoneyTracker" />
         <activity
             android:name=".Views.activity.AccountManagement"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.MoneyTracker" />
         <activity
             android:name=".Views.activity.EditDeleteActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.MoneyTracker" />
         <activity
             android:name=".Views.activity.AddTransactionActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.MoneyTracker" />
         <activity
             android:name=".Views.activity.RegisterActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.MoneyTracker" />
         <activity
             android:name=".Views.activity.Splash_Screen"
             android:exported="true">

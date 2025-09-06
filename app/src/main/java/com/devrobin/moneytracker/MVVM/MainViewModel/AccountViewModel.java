@@ -13,7 +13,7 @@ import java.util.List;
 
 public class AccountViewModel extends AndroidViewModel {
 
-    private  AccountRepository accountRepository;
+    private AccountRepository accountRepository;
     private LiveData<List<AccountModel>> allAccounts;
     private LiveData<Double> totalBalance;
 

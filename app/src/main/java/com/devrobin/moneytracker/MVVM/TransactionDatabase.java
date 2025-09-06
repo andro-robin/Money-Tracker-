@@ -12,11 +12,13 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 import com.devrobin.moneytracker.MVVM.DAO.AccountDAO;
 import com.devrobin.moneytracker.MVVM.DAO.BudgetDAO;
 import com.devrobin.moneytracker.MVVM.DAO.CategoryDAO;
+import com.devrobin.moneytracker.MVVM.DAO.FeedbackDAO;
 import com.devrobin.moneytracker.MVVM.DAO.ReminderDAO;
 import com.devrobin.moneytracker.MVVM.DAO.TransactionDao;
 import com.devrobin.moneytracker.MVVM.Model.AccountModel;
 import com.devrobin.moneytracker.MVVM.Model.BudgetModel;
 import com.devrobin.moneytracker.MVVM.Model.CategoryModel;
+import com.devrobin.moneytracker.MVVM.Model.FeedbackModel;
 import com.devrobin.moneytracker.MVVM.Model.ReminderModel;
 import com.devrobin.moneytracker.MVVM.Model.TransactionModel;
 import com.devrobin.moneytracker.R;
@@ -26,8 +28,8 @@ import java.util.concurrent.Executors;
 
 import utils.DateConverter;
 
-@Database(entities = {TransactionModel.class, AccountModel.class, BudgetModel.class, ReminderModel.class, CategoryModel.class},
-        version = 2, exportSchema = false)
+@Database(entities = {TransactionModel.class, AccountModel.class, BudgetModel.class, ReminderModel.class, CategoryModel.class, FeedbackModel.class},
+        version = 3, exportSchema = false)
 @TypeConverters({DateConverter.class})
 public abstract class TransactionDatabase extends RoomDatabase {
 
@@ -36,6 +38,7 @@ public abstract class TransactionDatabase extends RoomDatabase {
     public abstract BudgetDAO budgetDAO();
     public abstract ReminderDAO reminderDAO();
     public abstract CategoryDAO categoryDAO();
+    public abstract FeedbackDAO feedbackDAO();
 
 
 

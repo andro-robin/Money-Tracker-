@@ -120,6 +120,6 @@ public class AccountModel {
     }
 
     public String getCurrencySymbol() {
-
+        return utils.CurrencyConverter.getCurrencySymbol(currency);
     }
 }

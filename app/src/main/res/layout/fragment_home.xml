@@ -66,7 +66,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins"
-                        android:text="John Doe"
+                        android:text="Devid Warner"
                         android:textColor="@android:color/white"
                         android:textSize="15sp"
                         android:textStyle="bold" />
@@ -412,13 +412,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/emptyViewLayout"
-            android:layout_gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_weight="@integer/material_motion_duration_long_1">
 
 
             <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
                 android:src="@drawable/empty_transactionview"
                 android:id="@+id/emptyView"
                 android:gravity="center"/>
@@ -432,7 +433,6 @@
                 android:textSize="20sp"/>
 
         </LinearLayout>
-
 
     </LinearLayout>
 

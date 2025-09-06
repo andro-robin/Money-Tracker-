@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical"
+android:background="#FFFFFF"
+xmlns:tools="http://schemas.android.com/tools"
+android:id="@+id/main"
+tools:context=".Views.activity.LanguageSettingsActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/language_settings_title"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="12dp" />
+
+        <RadioGroup
+            android:id="@+id/languageGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:id="@+id/rbEnglish"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/lang_english" />
+
+            <RadioButton
+                android:id="@+id/rbBangla"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/lang_bangla" />
+
+            <RadioButton
+                android:id="@+id/rbHindi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/lang_hindi" />
+
+            <RadioButton
+                android:id="@+id/rbArabic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/lang_arabic" />
+
+            <RadioButton
+                android:id="@+id/rbSpanish"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/lang_spanish" />
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/tvInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/language_settings_info"
+            android:textSize="12sp"
+            android:layout_marginTop="16dp" />
+
+    </LinearLayout>
+
+</ScrollView>

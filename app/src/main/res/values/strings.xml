@@ -104,6 +104,56 @@
     <string name="firstpprivacyttext"><![CDATA[Lorem Ipsum  is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s,]]></string>
     <string name="remaining_balance">Remaining Balance</string>
     <string name="total_balance">Total Balance</string>
+    <string name="edit">Edit</string>
+    <string name="add_account">Add Account</string>
+    <string name="_200">200</string>
 
+    <string name="language_settings_title">Language Settings</string>
+    <string name="language_settings_info">Language preference applies across the entire app</string>
+    <string name="lang_english">English</string>
+    <string name="lang_bangla">বাংলা</string>
+    <string name="lang_hindi">हिन्दी</string>
+    <string name="lang_arabic">العربية</string>
+    <string name="lang_spanish">Español</string>
+
+
+    <string name="export_format">Format</string>
+    <string name="export_range">Range</string>
+    <string name="export_scope">Scope</string>
+    <string name="export">Export</string>
+    <string name="share">Share</string>
+    <string name="export_saved">Export saved to Downloads</string>
+    <string name="export_failed">Export failed</string>
+    <string name="export_failed_with_reason">Export failed: %1$s</string>
+    <string-array name="export_formats">
+        <item>CSV</item>
+        <item>PDF</item>
+        <item>JSON</item>
+    </string-array>
+    <string-array name="export_ranges">
+        <item>Monthly</item>
+        <item>Yearly</item>
+        <item>All Time</item>
+    </string-array>
+    <string-array name="export_scopes">
+        <item>Transactions Only</item>
+        <item>Accounts Only</item>
+        <item>Budgets Only</item>
+        <item>All Data</item>
+    </string-array>
+
+
+    <!-- Feedback -->
+    <string name="title_feedback">Feedback</string>
+    <string name="feedback_rate_que">How would you rate our app?</string>
+    <string name="feedback_hint">Write your feedback here...</string>
+    <string name="feedback_contact_hint">Your email (optional)</string>
+    <string name="feedback_submit">Submit</string>
+    <string name="feedback_submitted">Feedback submitted successfully</string>
+    <string name="feedback_select_rating">Please select a rating</string>
+    <string name="feedback_thanks_improve">Thanks for your feedback! We’ll work on improvements.</string>
+    <string name="feedback_love_prompt_title">Thank you!</string>
+    <string name="feedback_love_prompt_msg">Would you like to rate us on the Play Store?</string>
+    <string name="feedback_rate_playstore">Rate on Play Store</string>
 
 </resources>

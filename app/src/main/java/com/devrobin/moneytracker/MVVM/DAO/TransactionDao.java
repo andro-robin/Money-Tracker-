@@ -35,6 +35,14 @@ public interface TransactionDao {
     @Query("SELECT * FROM transaction_table WHERE DATE(transactionDate/1000, 'unixepoch') = DATE(:date/1000, 'unixepoch') ORDER BY transactionDate DESC, createDate DESC")
     LiveData<List<TransactionModel>> getTransactionByDate(long date);
 
+    //Transaction for specific date (synchronous)
+    @Query("SELECT * FROM transaction_table WHERE DATE(transactionDate/1000, 'unixepoch') = DATE(:date/1000, 'unixepoch') ORDER BY transactionDate DESC, createDate DESC")
+    List<TransactionModel> getTransactionByDateSync(long date);
+
+    //Transaction for specific month (synchronous)
+    @Query("SELECT * FROM transaction_table WHERE strftime('%Y-%m', transactionDate/1000, 'unixepoch') = strftime('%Y-%m', :date/1000, 'unixepoch') ORDER BY transactionDate DESC, createDate DESC")
+    List<TransactionModel> getTransactionByMonthSync(long date);
+
     //Daily Summery for Specific Date
     @Query("SELECT " +
             "COALESCE(SUM(CASE WHEN type = 'INCOME' THEN amount ELSE 0 END), 0) as totalIncome, " +
@@ -127,4 +135,7 @@ LiveData<List<CategoryChartData>> getCategoryChartData(long date);
             "ORDER BY strftime('%Y-%m', transactionDate/1000, 'unixepoch')")
     LiveData<List<MonthlyChartData>> getMonthlyChartData(long date);
 
+    // Get transactions by date range (synchronous)
+    @Query("SELECT * FROM transaction_table WHERE transactionDate BETWEEN :startDate AND :endDate ORDER BY transactionDate DESC, createDate DESC")
+    List<TransactionModel> getTransactionByDateRange(long startDate, long endDate);
 }

@@ -45,6 +45,7 @@ import java.util.List;
 import java.util.Locale;
 
 import utils.Constant;
+import utils.CurrencyConverter;
 import utils.DailySummer;
 import utils.MonthlySummary;
 import utils.SharedPrefsManager;
@@ -98,6 +99,11 @@ public class HomeFragment extends Fragment {
         setHasOptionsMenu(true);
 
         transViewModel = new ViewModelProvider(requireActivity()).get(TransViewModel.class);
+
+        // Initialize CurrencyConverter and SharedPrefsManager
+        CurrencyConverter.init(requireContext());
+        prefsManager = SharedPrefsManager.getInstance(requireContext());
+        defaultCurrency = prefsManager.getDefaultCurrency();
 
         Constant.setCategories();
 
@@ -225,18 +231,25 @@ public class HomeFragment extends Fragment {
             }
         });
 
-
-        //Observe Daily Summery
-        transViewModel.getDailySummery().observe(getViewLifecycleOwner(), new Observer<DailySummer>() {
-            @Override
-            public void onChanged(DailySummer dailySummer) {
-                if (dailySummer != null){
-                    updateDailySummery(dailySummer);
-                }
+        // Observe Daily Summary with Currency Conversion
+        String currentDefaultCurrency = prefsManager.getDefaultCurrency();
+        transViewModel.getDailySummerWithConversion(currentDefaultCurrency).observe(getViewLifecycleOwner(), dailySummer -> {
+            if (dailySummer != null) {
+                updateDailySummary(dailySummer);
             }
         });
 
-        transViewModel.getMonthlySummary().observe(getViewLifecycleOwner(), new Observer<MonthlySummary>() {
+        //Observe Daily Summery
+        // transViewModel.getDailySummery().observe(getViewLifecycleOwner(), new Observer<DailySummer>() {
+        //      @Override
+        //     public void onChanged(DailySummer dailySummer) {
+        //       if (dailySummer != null){
+                    //           updateDailySummery(dailySummer);
+        //       }
+        //      }
+    //  });
+
+        transViewModel.getMonthlySummaryWithConversion(currentDefaultCurrency).observe(getViewLifecycleOwner(), new Observer<MonthlySummary>() {
             @Override
             public void onChanged(MonthlySummary monthlySummary) {
                 if (monthlySummary != null){
@@ -246,20 +259,38 @@ public class HomeFragment extends Fragment {
         });
 
 
+
+
+    }
+
+    private String formatAmountWithCurrency(double amount, String currency) {
+        String symbol = CurrencyConverter.getCurrencySymbol(currency);
+        return String.format("%s %.0f", symbol, amount);
     }
 
     @SuppressLint("DefaultLocale")
     private void updateMonthlySummary(MonthlySummary monthlySummary) {
 
-        homeBinding.monthlyIncomeAmount.setText(String.format("%.0f", monthlySummary.getMonthlyIncome()));
-        homeBinding.monthlyExpenseAmount.setText(String.format("%.0f", monthlySummary.getMonthlyExpense()));
-        homeBinding.monthlyBalanceAmount.setText(String.format("%.0f", monthlySummary.getMonthlyBalance()));
+        //homeBinding.monthlyIncomeAmount.setText(String.format("%.0f", monthlySummary.getMonthlyIncome()));
+        // homeBinding.monthlyExpenseAmount.setText(String.format("%.0f", monthlySummary.getMonthlyExpense()));
+        //  homeBinding.monthlyBalanceAmount.setText(String.format("%.0f", monthlySummary.getMonthlyBalance()));
 
+        // Get current default currency
+        String currentDefaultCurrency = prefsManager.getDefaultCurrency();
+
+        // Format amounts with currency symbol
+        String incomeText = formatAmountWithCurrency(monthlySummary.getMonthlyIncome(), currentDefaultCurrency);
+        String expenseText = formatAmountWithCurrency(monthlySummary.getMonthlyExpense(), currentDefaultCurrency);
+        String balanceText = formatAmountWithCurrency(monthlySummary.getMonthlyBalance(), currentDefaultCurrency);
+
+        homeBinding.monthlyIncomeAmount.setText(incomeText);
+        homeBinding.monthlyExpenseAmount.setText(expenseText);
+        homeBinding.monthlyBalanceAmount.setText(balanceText);
 
     }
 
     @SuppressLint("DefaultLocale")
-    private void updateDailySummery(DailySummer dailySummer) {
+    private void updateDailySummary(DailySummer dailySummer) {
 
         // Get current default currency
         String currentDefaultCurrency = prefsManager.getDefaultCurrency();
@@ -285,7 +316,7 @@ public class HomeFragment extends Fragment {
         // homeBinding.totalTransaction.setText(String.format("%d", dailySummer.getTransactionCount()));
 
         // Update monthly balance display
-        updateMonthlyBalanceDisplay();
+        // updateMonthlyBalanceDisplay();
     }
 
 
@@ -417,4 +448,50 @@ public class HomeFragment extends Fragment {
 
         super.onCreateOptionsMenu(menu, inflater);
     }
+
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        // Refresh default currency and update displays
+        String newDefaultCurrency = prefsManager.getDefaultCurrency();
+        if (!newDefaultCurrency.equals(defaultCurrency)) {
+            defaultCurrency = newDefaultCurrency;
+            // Refresh all currency displays
+            refreshCurrencyDisplays();
+        }
+    }
+
+    /**
+     * Refresh all currency displays when default currency changes
+     */
+    private void refreshCurrencyDisplays() {
+        // Force refresh of daily and monthly summaries
+        String currentDefaultCurrency = prefsManager.getDefaultCurrency();
+
+        // Refresh daily summary
+        transViewModel.getDailySummerWithConversion(currentDefaultCurrency).observe(getViewLifecycleOwner(), dailySummer -> {
+            if (dailySummer != null) {
+                updateDailySummary(dailySummer);
+            }
+        });
+
+        // Refresh monthly summary
+        transViewModel.getMonthlySummaryWithConversion(currentDefaultCurrency).observe(getViewLifecycleOwner(), monthlySummary -> {
+            if (monthlySummary != null) {
+                updateMonthlySummary(monthlySummary);
+            }
+        });
+    }
+
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if (transAdapter != null) {
+            transAdapter.cleanup();
+        }
+    }
+    
 }
